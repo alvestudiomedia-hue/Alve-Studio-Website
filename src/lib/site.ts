@@ -1,3 +1,5 @@
+import type { SocialIconName } from "@/components/ui/icons";
+
 /**
  * Single source of truth for site-wide chrome (nav, footer, meta).
  * Page-specific copy lives with its section component.
@@ -55,8 +57,20 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
   },
 ];
 
-export const socialLinks: { label: string; href: string; icon: "x" | "linkedin" | "dribbble" }[] = [
+export const socialLinks: {
+  label: string;
+  href: string;
+  icon: SocialIconName;
+}[] = [
   { label: "Alve Studio on X", href: "https://x.com", icon: "x" },
-  { label: "Alve Studio on LinkedIn", href: "https://linkedin.com", icon: "linkedin" },
-  { label: "Alve Studio on Dribbble", href: "https://dribbble.com", icon: "dribbble" },
+  {
+    label: "Alve Studio on LinkedIn",
+    href: "https://linkedin.com",
+    icon: "linkedin",
+  },
+  {
+    label: "Alve Studio on Instagram",
+    href: "https://instagram.com",
+    icon: "instagram",
+  },
 ];

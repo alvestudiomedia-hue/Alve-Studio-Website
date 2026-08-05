@@ -116,7 +116,10 @@
   --shadow-lift: 0 2px 4px rgb(21 18 28 / 0.05),
     0 20px 48px -20px rgb(21 18 28 / 0.28);
 
-  /* ---------- 04 · MOTION ---------------------------------------------- */
+  /* ---------- 04 · RATIOS ---------------------------------------------- */
+  --aspect-portrait: 4 / 5;
+
+  /* ---------- 05 · MOTION ---------------------------------------------- */
   --animate-marquee: marquee 42s linear infinite;
 
   @keyframes marquee {
@@ -212,6 +215,15 @@
         var(--color-dark-background)
       )
       100%
+  );
+}
+
+/* A soft top-left highlight that gives flat brand fills some depth. */
+@utility sheen {
+  background-image: radial-gradient(
+    62% 82% at 18% 8%,
+    rgb(255 255 255 / 0.22) 0%,
+    transparent 62%
   );
 }
 
