@@ -6,18 +6,17 @@ import { ArrowRight } from "@/components/ui/icons";
 
 export function Hero() {
   return (
-    <Section tone="hero" className="relative overflow-hidden">
+    <Section tone="hero" className="relative overflow-hidden lg:py-36">
       <Container className="relative">
-        <div className="max-w-4xl">
-          <Eyebrow variant="dot" className="text-dark-ink">
+        <div className="max-w-5xl">
+          <Eyebrow className="text-dark-ink">
             Full-cycle product studio
           </Eyebrow>
 
-          <h1 className="mt-7 font-display text-display-sm text-balance md:text-h1 lg:text-display">
+          {/* Inter, not Fraunces — the hero is the one headline set in the body face. */}
+          <h1 className="mt-7 font-sans text-display-sm text-balance md:text-h1 lg:text-hero">
             One Team. Every Stage.{" "}
-            <span className="block">
-              Zero Vendor <em className="text-purple-pale">Juggling.</em>
-            </span>
+            <span className="block">Zero Vendor Juggling.</span>
           </h1>
 
           <p className="mt-8 max-w-2xl text-body-lg text-dark-ink-soft text-pretty">

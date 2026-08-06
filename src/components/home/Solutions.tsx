@@ -58,7 +58,7 @@ function SolutionCard({ solution }: { solution: Solution }) {
   return (
     <article
       className={cn(
-        "rounded-sm border border-border bg-surface p-7 transition-colors duration-200 hover:border-border-strong",
+        "rounded-sm border border-border bg-surface p-9 transition-colors duration-200 hover:border-border-strong",
         solution.wide && "lg:col-span-2",
       )}
     >
@@ -84,9 +84,9 @@ function SolutionCard({ solution }: { solution: Solution }) {
 
 export function Solutions() {
   return (
-    <Section tone="background">
+    <Section id="process" tone="background" className="scroll-mt-30">
       <Container>
-        <h2 className="max-w-2xl font-display text-display-sm text-purple-ink text-balance lg:text-h1">
+        <h2 className="max-w-2xl font-sans text-h1 text-purple-ink text-balance">
           Digital Solutions Designed Around Your Business
         </h2>
 

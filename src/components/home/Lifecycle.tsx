@@ -16,7 +16,7 @@ export function Lifecycle() {
   return (
     <Section tone="deep">
       <Container>
-        <h2 className="font-display text-display-sm text-balance lg:text-h1">
+        <h2 className="font-sans text-h1 text-balance">
           The Alve Lifecycle
         </h2>
 
@@ -30,7 +30,7 @@ export function Lifecycle() {
             <li key={stage.title} className="relative">
               <span
                 className={cn(
-                  "relative inline-flex size-12 items-center justify-center rounded-pill font-mono text-body-sm",
+                  "relative inline-flex size-12 items-center justify-center rounded-pill font-sans text-body-sm",
                   index === 0
                     ? "bg-purple-pale text-purple-ink"
                     : "bg-dark-ink text-purple-ink",

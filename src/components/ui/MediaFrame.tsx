@@ -47,7 +47,7 @@ export function MediaFrame({
             aria-hidden="true"
             className="sheen pointer-events-none absolute inset-0"
           />
-          <span className="relative font-mono text-caption uppercase text-dark-ink/80">
+          <span className="relative font-sans text-caption uppercase text-dark-ink/80">
             {alt}
           </span>
         </div>

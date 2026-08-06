@@ -20,7 +20,7 @@ export function Outcomes() {
           />
 
           <div>
-            <h2 className="font-display text-display-sm text-purple-ink text-balance lg:text-h1">
+            <h2 className="font-sans text-h1 text-purple-ink text-balance">
               We Don&apos;t Just Build Products. We Build Outcomes.
             </h2>
 
@@ -37,12 +37,12 @@ export function Outcomes() {
                 <div key={stat.label}>
                   <dt className="sr-only">{stat.label}</dt>
                   <dd>
-                    <span className="block font-display text-h1 text-purple-ink">
+                    <span className="block font-sans text-h2 text-purple-ink">
                       {stat.value}
                     </span>
                     <span
                       aria-hidden="true"
-                      className="mt-2 block font-mono text-eyebrow uppercase text-ink-faint"
+                      className="mt-2 block font-sans text-eyebrow uppercase text-ink-faint"
                     >
                       {stat.label}
                     </span>

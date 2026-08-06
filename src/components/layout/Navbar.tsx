@@ -17,8 +17,25 @@ type NavbarProps = {
   className?: string;
 };
 
-const isActive = (pathname: string, href: string) =>
-  href === "/" ? pathname === "/" : pathname.startsWith(href);
+/** Ids of the home-page sections the nav jumps to, e.g. "/#portfolio". */
+const jumpTargets = primaryNav
+  .filter((link) => link.href.includes("#"))
+  .map((link) => link.href.split("#")[1]);
+
+/** The y-offset a section must cross to count as the one being read. */
+const SPY_LINE = 200;
+
+function isActive(pathname: string, href: string, section: string | null) {
+  const [path, hash] = href.split("#");
+
+  // Jump links only light up when their section is the one in view.
+  if (hash) return pathname === (path || "/") && section === hash;
+
+  // Home yields to whichever section has scrolled into view.
+  if (href === "/") return pathname === "/" && !section;
+
+  return pathname.startsWith(href);
+}
 
 export function Navbar({
   ctaLabel = "Start Your Project",
@@ -27,6 +44,42 @@ export function Navbar({
 }: NavbarProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [section, setSection] = useState<string | null>(null);
+
+  // Track which jump-target section is currently under the spy line.
+  useEffect(() => {
+    if (pathname !== "/" || jumpTargets.length === 0) return;
+
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      let current: string | null = null;
+
+      for (const id of jumpTargets) {
+        const rect = document.getElementById(id)?.getBoundingClientRect();
+        if (rect && rect.top <= SPY_LINE && rect.bottom > SPY_LINE) {
+          current = id;
+        }
+      }
+
+      setSection(current);
+    };
+
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [pathname]);
 
   // Lock body scroll behind the mobile sheet.
   useEffect(() => {
@@ -61,13 +114,19 @@ export function Navbar({
           className="hidden items-center gap-9 lg:flex"
         >
           {primaryNav.map((link) => {
-            const active = isActive(pathname, link.href);
+            const active = isActive(pathname, link.href, section);
 
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                aria-current={active ? "page" : undefined}
+                aria-current={
+                  active
+                    ? link.href.includes("#")
+                      ? "location"
+                      : "page"
+                    : undefined
+                }
                 className={cn(
                   "relative py-2 text-body-sm transition-colors duration-200",
                   active ? "text-ink" : "text-ink-muted hover:text-ink",
@@ -112,14 +171,20 @@ export function Navbar({
       >
         <Container className="flex flex-col gap-1 py-4">
           {primaryNav.map((link) => {
-            const active = isActive(pathname, link.href);
+            const active = isActive(pathname, link.href, section);
 
             return (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                aria-current={active ? "page" : undefined}
+                aria-current={
+                  active
+                    ? link.href.includes("#")
+                      ? "location"
+                      : "page"
+                    : undefined
+                }
                 className={cn(
                   "rounded-sm px-3 py-3 text-body transition-colors duration-200",
                   active

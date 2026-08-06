@@ -12,7 +12,7 @@ export function Industries() {
   return (
     <section
       aria-label="Industries we build for"
-      className="border-y border-border bg-surface py-6"
+      className="border-y border-border bg-surface py-12"
     >
       <div className="mask-edges flex overflow-hidden">
         {/* Two tracks so the loop is seamless at -50%. */}
@@ -25,7 +25,7 @@ export function Industries() {
             {industries.map((industry) => (
               <li
                 key={industry}
-                className="font-mono text-eyebrow uppercase whitespace-nowrap text-ink-faint"
+                className="font-sans text-eyebrow uppercase whitespace-nowrap text-ink-faint"
               >
                 {industry}
               </li>

@@ -16,11 +16,12 @@ export type NavLink = {
   href: string;
 };
 
+/* Portfolio and Process are jump links into home-page sections, not routes. */
 export const primaryNav: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Process", href: "/process" },
+  { label: "Portfolio", href: "/#portfolio" },
+  { label: "Process", href: "/#process" },
   { label: "Contact", href: "/contact" },
 ];
 

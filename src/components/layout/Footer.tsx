@@ -9,7 +9,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border bg-surface-3">
-      <Container className="py-16 md:py-20">
+      <Container className="py-16 md:py-24">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_repeat(3,1fr)] lg:gap-8">
           <div className="max-w-xs">
             <Logo />
@@ -41,7 +41,7 @@ export function Footer() {
 
           {footerNav.map((group) => (
             <nav key={group.title} aria-label={group.title}>
-              <h2 className="font-mono text-eyebrow uppercase text-ink-faint">
+              <h2 className="font-sans text-eyebrow uppercase text-ink-faint">
                 {group.title}
               </h2>
               <ul className="mt-5 space-y-3">
@@ -61,10 +61,10 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-border pt-7 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-caption text-ink-faint">
+          <p className="font-sans text-caption text-ink-faint">
             © {year} {site.name} · {site.location}
           </p>
-          <p className="font-mono text-caption text-ink-faint">
+          <p className="font-sans text-caption text-ink-faint">
             All rights reserved.
           </p>
         </div>

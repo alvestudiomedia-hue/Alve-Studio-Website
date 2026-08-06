@@ -1,106 +1,110 @@
 @import "tailwindcss";
 
-/* Alve Studio design tokens. Values are sampled from the Figma page comps.
+/* Alve Studio design tokens.
+   :root holds the raw values, @theme inline maps them onto Tailwind utilities.
    Always reference colour, type and radius by name — bg-[#2E0072] is a bug. */
 
-@theme {
+@theme inline {
   /* Brand */
-  --color-purple-ink: #2e0072;
-  --color-purple-deep: #45228a;
-  --color-purple-deep-2: #5a2fae;
-  --color-purple-mid: #6d44c1;
-  --color-purple-light: #8c5ac2;
-  --color-purple-pale: #d1bcff;
-  --color-purple-tint: #efe7f8;
+  --color-purple-ink: var(--purple-ink);
+  --color-purple-deep: var(--purple-deep);
+  --color-purple-deep-2: var(--purple-deep-2);
+  --color-purple-mid: var(--purple-mid);
+  --color-purple-light: var(--purple-light);
+  --color-purple-pale: var(--purple-pale);
+  --color-purple-tint: var(--purple-tint);
 
   /* Neutrals — light */
-  --color-background: #fef7ff;
-  --color-surface: #ffffff;
-  --color-surface-2: #f5eaff;
-  --color-surface-3: #f0e4fa;
-  --color-ink: #15121c;
-  --color-ink-soft: #494552;
-  --color-ink-faint: #8a8290;
-  --color-ink-muted: #c8bad8;
-  --color-border: rgb(21 18 28 / 0.11);
-  --color-border-strong: rgb(21 18 28 / 0.22);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-ink-muted: var(--ink-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
 
   /* Neutrals — dark */
-  --color-dark-background: #120e1b;
-  --color-dark-surface: #1c172b;
-  --color-dark-surface-2: #241d33;
-  --color-dark-ink: #efe7fa;
-  --color-dark-ink-soft: rgb(239 231 250 / 0.72);
-  --color-dark-ink-faint: rgb(239 231 250 / 0.52);
-  --color-dark-border: rgb(239 231 250 / 0.14);
-  --color-dark-border-strong: rgb(239 231 250 / 0.28);
+  --color-dark-background: var(--dark-background);
+  --color-dark-surface: var(--dark-surface);
+  --color-dark-surface-2: var(--dark-surface-2);
+  --color-dark-ink: var(--dark-ink);
+  --color-dark-ink-soft: var(--dark-ink-soft);
+  --color-dark-ink-faint: var(--dark-ink-faint);
+  --color-dark-border: var(--dark-border);
+  --color-dark-border-strong: var(--dark-border-strong);
 
   /* Families */
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-display: var(--font-display-family);
+  --font-sans: var(--font-sans-family);
+  --font-mono: var(--font-mono-family);
 
-  /* Type scale. Each token carries its own line-height, tracking and weight. */
-  --text-display: 6rem;
-  --text-display--line-height: 6.5rem;
-  --text-display--letter-spacing: -0.02em;
-  --text-display--font-weight: 500;
+  /* Type scale — each token carries its line-height, tracking and weight */
+  --text-display: var(--type-display-size);
+  --text-display--line-height: var(--type-display-leading);
+  --text-display--letter-spacing: var(--type-display-tracking);
+  --text-display--font-weight: var(--type-display-weight);
 
-  --text-display-sm: 2.75rem;
-  --text-display-sm--line-height: 3rem;
-  --text-display-sm--letter-spacing: -0.02em;
-  --text-display-sm--font-weight: 500;
+  --text-display-sm: var(--type-display-sm-size);
+  --text-display-sm--line-height: var(--type-display-sm-leading);
+  --text-display-sm--letter-spacing: var(--type-display-sm-tracking);
+  --text-display-sm--font-weight: var(--type-display-sm-weight);
 
-  --text-h1: 3.25rem;
-  --text-h1--line-height: 3.5rem;
-  --text-h1--letter-spacing: -0.01em;
-  --text-h1--font-weight: 600;
+  --text-hero: var(--type-hero-size);
+  --text-hero--line-height: var(--type-hero-leading);
+  --text-hero--letter-spacing: var(--type-hero-tracking);
+  --text-hero--font-weight: var(--type-hero-weight);
 
-  --text-h2: 1.375rem;
-  --text-h2--line-height: 1.75rem;
-  --text-h2--letter-spacing: -0.01em;
-  --text-h2--font-weight: 600;
+  --text-h1: var(--type-h1-size);
+  --text-h1--line-height: var(--type-h1-leading);
+  --text-h1--letter-spacing: var(--type-h1-tracking);
+  --text-h1--font-weight: var(--type-h1-weight);
 
-  --text-body-lg: 1.25rem;
-  --text-body-lg--line-height: 2rem;
-  --text-body-lg--font-weight: 400;
+  --text-h2: var(--type-h2-size);
+  --text-h2--line-height: var(--type-h2-leading);
+  --text-h2--letter-spacing: var(--type-h2-tracking);
+  --text-h2--font-weight: var(--type-h2-weight);
 
-  --text-body: 1rem;
-  --text-body--line-height: 1.625rem;
-  --text-body--font-weight: 400;
+  --text-body-lg: var(--type-body-lg-size);
+  --text-body-lg--line-height: var(--type-body-lg-leading);
+  --text-body-lg--font-weight: var(--type-body-lg-weight);
 
-  --text-body-sm: 0.84375rem;
-  --text-body-sm--line-height: 1.25rem;
-  --text-body-sm--font-weight: 500;
+  --text-body: var(--type-body-size);
+  --text-body--line-height: var(--type-body-leading);
+  --text-body--font-weight: var(--type-body-weight);
 
-  --text-button: 0.875rem;
-  --text-button--line-height: 1;
-  --text-button--font-weight: 600;
+  --text-body-sm: var(--type-body-sm-size);
+  --text-body-sm--line-height: var(--type-body-sm-leading);
+  --text-body-sm--font-weight: var(--type-body-sm-weight);
 
-  --text-eyebrow: 0.71875rem;
-  --text-eyebrow--line-height: 1;
-  --text-eyebrow--letter-spacing: 0.14em;
-  --text-eyebrow--font-weight: 500;
+  --text-button: var(--type-button-size);
+  --text-button--line-height: var(--type-button-leading);
+  --text-button--font-weight: var(--type-button-weight);
 
-  --text-caption: 0.6875rem;
-  --text-caption--line-height: 1rem;
-  --text-caption--font-weight: 400;
+  --text-eyebrow: var(--type-eyebrow-size);
+  --text-eyebrow--line-height: var(--type-eyebrow-leading);
+  --text-eyebrow--letter-spacing: var(--type-eyebrow-tracking);
+  --text-eyebrow--font-weight: var(--type-eyebrow-weight);
 
-  /* Radius — buttons 8, cards 12, media 28 */
-  --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius-md: 18px;
-  --radius-lg: 28px;
-  --radius-pill: 999px;
+  --text-caption: var(--type-caption-size);
+  --text-caption--line-height: var(--type-caption-leading);
+  --text-caption--font-weight: var(--type-caption-weight);
 
-  --shadow-soft: 0 1px 2px rgb(21 18 28 / 0.04),
-    0 10px 30px -14px rgb(21 18 28 / 0.18);
-  --shadow-lift: 0 2px 4px rgb(21 18 28 / 0.05),
-    0 20px 48px -20px rgb(21 18 28 / 0.28);
+  /* Radius & elevation */
+  --radius-xs: var(--radius-button);
+  --radius-sm: var(--radius-card);
+  --radius-md: var(--radius-panel);
+  --radius-lg: var(--radius-media);
+  --radius-pill: var(--radius-round);
 
-  --aspect-portrait: 4 / 5;
+  --shadow-soft: var(--elevation-soft);
+  --shadow-lift: var(--elevation-lift);
 
-  --animate-marquee: marquee 42s linear infinite;
+  /* Ratios & motion */
+  --aspect-portrait: var(--ratio-portrait);
+  --animate-marquee: var(--motion-marquee);
 
   @keyframes marquee {
     from {
@@ -112,6 +116,114 @@
   }
 }
 
+:root {
+  /* ---- Brand ---- */
+  --purple-ink: rgba(46, 0, 114, 1);
+  --purple-deep: rgba(69, 34, 138, 1);
+  --purple-deep-2: rgba(90, 47, 174, 1);
+  --purple-mid: rgba(109, 68, 193, 1);
+  --purple-light: rgba(140, 90, 194, 1);
+  --purple-pale: rgba(209, 188, 255, 1);
+  --purple-tint: rgba(239, 231, 248, 1);
+
+  /* ---- Neutrals — light ---- */
+  --background: rgba(254, 247, 255, 1);
+  --surface: rgba(255, 255, 255, 1);
+  --surface-2: rgba(245, 234, 255, 1);
+  --surface-3: rgba(240, 228, 250, 1);
+  --ink: rgba(21, 18, 28, 1);
+  --ink-soft: rgba(73, 69, 82, 1);
+  --ink-faint: rgba(138, 130, 144, 1);
+  --ink-muted: rgba(200, 186, 216, 1);
+  --border: rgba(21, 18, 28, 0.11);
+  --border-strong: rgba(21, 18, 28, 0.22);
+
+  /* ---- Neutrals — dark ---- */
+  --dark-background: rgba(18, 14, 27, 1);
+  --dark-surface: rgba(28, 23, 43, 1);
+  --dark-surface-2: rgba(36, 29, 51, 1);
+  --dark-ink: rgba(239, 231, 250, 1);
+  --dark-ink-soft: rgba(239, 231, 250, 0.72);
+  --dark-ink-faint: rgba(239, 231, 250, 0.52);
+  --dark-border: rgba(239, 231, 250, 0.14);
+  --dark-border-strong: rgba(239, 231, 250, 0.28);
+
+  /* ---- Families ---- */
+  --font-display-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono-family: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* ---- Type scale ---- */
+  --type-display-size: 6rem;
+  --type-display-leading: 6.5rem;
+  --type-display-tracking: -0.02em;
+  --type-display-weight: 500;
+
+  --type-display-sm-size: 2.75rem;
+  --type-display-sm-leading: 3rem;
+  --type-display-sm-tracking: -0.02em;
+  --type-display-sm-weight: 500;
+
+  /* Hero — Inter, the one headline set in the body face (comp: 60 / 70) */
+  --type-hero-size: 3.75rem;
+  --type-hero-leading: 4.375rem;
+  --type-hero-tracking: -0.02em;
+  --type-hero-weight: 700;
+
+  /* Section headings (comp: 30 / 41) */
+  --type-h1-size: 1.875rem;
+  --type-h1-leading: 2.5625rem;
+  --type-h1-tracking: -0.01em;
+  --type-h1-weight: 600;
+
+  /* Card titles (comp: 17 / 24) */
+  --type-h2-size: 1.0625rem;
+  --type-h2-leading: 1.5rem;
+  --type-h2-tracking: -0.01em;
+  --type-h2-weight: 600;
+
+  --type-body-lg-size: 1rem;
+  --type-body-lg-leading: 1.625rem;
+  --type-body-lg-weight: 400;
+
+  --type-body-size: 0.875rem;
+  --type-body-leading: 1.375rem;
+  --type-body-weight: 400;
+
+  --type-body-sm-size: 0.8125rem;
+  --type-body-sm-leading: 1.25rem;
+  --type-body-sm-weight: 400;
+
+  --type-button-size: 0.875rem;
+  --type-button-leading: 1;
+  --type-button-weight: 600;
+
+  --type-eyebrow-size: 0.71875rem;
+  --type-eyebrow-leading: 1;
+  --type-eyebrow-tracking: 0.14em;
+  --type-eyebrow-weight: 600;
+
+  --type-caption-size: 0.6875rem;
+  --type-caption-leading: 1rem;
+  --type-caption-weight: 400;
+
+  /* ---- Radius & elevation ---- */
+  --radius-button: 8px;
+  --radius-card: 12px;
+  --radius-panel: 18px;
+  --radius-media: 28px;
+  --radius-round: 999px;
+
+  --elevation-soft: 0 1px 2px rgba(21, 18, 28, 0.04),
+    0 10px 30px -14px rgba(21, 18, 28, 0.18);
+  --elevation-lift: 0 2px 4px rgba(21, 18, 28, 0.05),
+    0 20px 48px -20px rgba(21, 18, 28, 0.28);
+
+  /* ---- Ratios & motion ---- */
+  --ratio-portrait: 4 / 5;
+  --motion-marquee: marquee 42s linear infinite;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -119,11 +231,11 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-ink);
-    font-family: var(--font-sans);
-    font-size: var(--text-body);
-    line-height: var(--text-body--line-height);
+    background-color: var(--background);
+    color: var(--ink);
+    font-family: var(--font-sans-family);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -136,8 +248,8 @@
   }
 
   ::selection {
-    background-color: var(--color-purple-deep);
-    color: var(--color-surface);
+    background-color: var(--purple-deep);
+    color: var(--surface);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -158,51 +270,34 @@
 @utility gradient-brand {
   background-image: linear-gradient(
     100deg,
-    var(--color-purple-light) 0%,
-    var(--color-purple-deep-2) 46%,
-    var(--color-purple-deep) 100%
+    var(--purple-light) 0%,
+    var(--purple-deep-2) 46%,
+    var(--purple-deep) 100%
   );
 }
 
 @utility gradient-hero {
-  background-color: var(--color-purple-ink);
+  background-color: var(--purple-ink);
   background-image:
-    radial-gradient(
-      74% 132% at 10% -12%,
-      var(--color-purple-deep-2) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      62% 110% at 92% 22%,
-      var(--color-purple-ink) 0%,
-      transparent 62%
-    ),
-    linear-gradient(
-      104deg,
-      transparent 40%,
-      var(--color-dark-background) 100%
-    );
+    radial-gradient(74% 132% at 10% -12%, var(--purple-deep-2) 0%, transparent 60%),
+    radial-gradient(62% 110% at 92% 22%, var(--purple-ink) 0%, transparent 62%),
+    linear-gradient(104deg, transparent 40%, var(--dark-background) 100%);
 }
 
 @utility gradient-deep {
-  background-color: var(--color-purple-ink);
+  background-color: var(--purple-ink);
   background-image: linear-gradient(
     132deg,
-    var(--color-purple-ink) 0%,
-    var(--color-purple-ink) 46%,
-    color-mix(
-        in oklab,
-        var(--color-purple-ink) 76%,
-        var(--color-dark-background)
-      )
-      100%
+    var(--purple-ink) 0%,
+    var(--purple-ink) 46%,
+    color-mix(in oklab, var(--purple-ink) 76%, var(--dark-background)) 100%
   );
 }
 
 @utility sheen {
   background-image: radial-gradient(
     62% 82% at 18% 8%,
-    rgb(255 255 255 / 0.22) 0%,
+    rgba(255, 255, 255, 0.22) 0%,
     transparent 62%
   );
 }

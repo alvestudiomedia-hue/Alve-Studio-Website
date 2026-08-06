@@ -84,14 +84,14 @@ function BentoCard({ item }: { item: AdvantageItem }) {
   return (
     <article
       className={cn(
-        "flex w-full flex-col rounded-sm border p-8 transition-shadow duration-200 hover:shadow-soft",
+        "flex w-full flex-col rounded-sm border p-10 transition-shadow duration-200 hover:shadow-soft",
         cardStyles[item.tone],
         item.wide && "lg:col-span-2",
       )}
     >
       <Icon className={cn("size-8", iconStyles[item.tone])} />
 
-      <h3 className={cn("mt-7 text-h2", titleStyles[item.tone])}>
+      <h3 className={cn("mt-10 text-h2", titleStyles[item.tone])}>
         {item.title}
       </h3>
       <p className={cn("mt-3 text-body-sm text-pretty", bodyStyles[item.tone])}>
@@ -103,10 +103,10 @@ function BentoCard({ item }: { item: AdvantageItem }) {
 
 export function Advantage() {
   return (
-    <Section tone="tint">
+    <Section id="portfolio" tone="tint" className="scroll-mt-30">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-display-sm text-purple-ink text-balance lg:text-h1">
+          <h2 className="font-sans text-h1 text-purple-ink text-balance">
             One Partner. Every Stage.
           </h2>
           <p className="mt-5 text-body text-ink-soft text-pretty">
