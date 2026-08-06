@@ -2,14 +2,9 @@ import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 type MediaFrameProps = {
-  /**
-   * Drop a real photograph in `/public/images` and pass its path here.
-   * Until then the frame renders a branded placeholder so layout and spacing
-   * are already final.
-   */
+  /** Omit to render a branded placeholder at the final size. */
   src?: string;
   alt: string;
-  /** Aspect ratio of the frame. */
   ratio?: "video" | "square" | "portrait";
   className?: string;
 };
@@ -48,7 +43,6 @@ export function MediaFrame({
           aria-label={alt}
           className="gradient-brand absolute inset-0 flex items-end p-6"
         >
-          {/* Soft depth so the placeholder reads as art direction, not a gap. */}
           <span
             aria-hidden="true"
             className="sheen pointer-events-none absolute inset-0"

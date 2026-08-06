@@ -7,14 +7,19 @@ type ContainerProps = {
   className?: string;
 };
 
-/** The single horizontal rhythm for every section on the site. */
+/** 1280px frame with 66px side margins, per the comp → 1152px of content. */
 export function Container({
   as: Tag = "div",
   children,
   className,
 }: ContainerProps) {
   return (
-    <Tag className={cn("mx-auto w-full max-w-7xl px-6 md:px-10", className)}>
+    <Tag
+      className={cn(
+        "mx-auto w-full max-w-7xl px-6 md:px-10 lg:px-16",
+        className,
+      )}
+    >
       {children}
     </Tag>
   );

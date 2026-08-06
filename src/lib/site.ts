@@ -1,9 +1,6 @@
 import type { SocialIconName } from "@/components/ui/icons";
 
-/**
- * Single source of truth for site-wide chrome (nav, footer, meta).
- * Page-specific copy lives with its section component.
- */
+/* Site-wide chrome. Page copy lives with its section component. */
 
 export const site = {
   name: "Alve Studio",

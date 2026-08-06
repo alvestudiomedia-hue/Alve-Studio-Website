@@ -53,7 +53,7 @@ export function Navbar({
         className,
       )}
     >
-      <Container className="flex h-18 items-center justify-between gap-6">
+      <Container className="flex h-30 items-center justify-between gap-6">
         <Logo />
 
         <nav
@@ -70,9 +70,7 @@ export function Navbar({
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "relative py-2 text-body-sm transition-colors duration-200",
-                  active
-                    ? "text-ink"
-                    : "text-ink-faint hover:text-ink",
+                  active ? "text-ink" : "text-ink-muted hover:text-ink",
                 )}
               >
                 {link.label}

@@ -1,112 +1,94 @@
 @import "tailwindcss";
 
-/* ==========================================================================
-   ALVE STUDIO — DESIGN SYSTEM v1.0
-   Every token below mirrors a Figma style 1:1. Always reference colour, type
-   and radius BY NAME (bg-purple-deep, text-ink-soft, rounded-lg).
-   Arbitrary values such as bg-[#45228A] are considered a bug.
-   ========================================================================== */
+/* Alve Studio design tokens. Values are sampled from the Figma page comps.
+   Always reference colour, type and radius by name — bg-[#2E0072] is a bug. */
 
 @theme {
-  /* ---------- 01 · COLOR ------------------------------------------------ */
+  /* Brand */
+  --color-purple-ink: #2e0072;
+  --color-purple-deep: #45228a;
+  --color-purple-deep-2: #5a2fae;
+  --color-purple-mid: #6d44c1;
+  --color-purple-light: #8c5ac2;
+  --color-purple-pale: #d1bcff;
+  --color-purple-tint: #efe7f8;
 
-  /* Brand — purple.
-     One deep purple carries the whole brand: buttons, key accents, dark
-     surfaces. Never decoration. Everything else stays quiet. */
-  --color-purple-deep: #45228a; /* Primary. Buttons, links, active states   */
-  --color-purple-deep-2: #5a2fae; /* Gradient partner, hover states         */
-  --color-purple-light: #8c5ac2; /* Secondary accents, light-mode icon tint */
-  --color-purple-tint: #efe7f8; /* Icon chips, subtle fills on light        */
+  /* Neutrals — light */
+  --color-background: #fef7ff;
+  --color-surface: #ffffff;
+  --color-surface-2: #f5eaff;
+  --color-surface-3: #f0e4fa;
+  --color-ink: #15121c;
+  --color-ink-soft: #494552;
+  --color-ink-faint: #8a8290;
+  --color-ink-muted: #c8bad8;
+  --color-border: rgb(21 18 28 / 0.11);
+  --color-border-strong: rgb(21 18 28 / 0.22);
 
-  /* Neutrals — light mode */
-  --color-background: #f7f4ee; /* App / page background                     */
-  --color-surface: #ffffff; /* Cards, bento cells, inputs                   */
-  --color-surface-2: #f0ece3; /* Nested surfaces, toggle tracks, footers    */
-  --color-ink: #15121c; /* Primary text — warm near-black, not true black   */
-  --color-ink-soft: #57565f; /* Body copy, secondary text                   */
-  --color-ink-faint: #8a8290; /* Captions, timestamps, disabled states      */
-  --color-border: rgb(21 18 28 / 0.11); /* Hairline dividers, card outlines */
-  --color-border-strong: rgb(21 18 28 / 0.22); /* Hover borders, focus rings */
+  /* Neutrals — dark */
+  --color-dark-background: #120e1b;
+  --color-dark-surface: #1c172b;
+  --color-dark-surface-2: #241d33;
+  --color-dark-ink: #efe7fa;
+  --color-dark-ink-soft: rgb(239 231 250 / 0.72);
+  --color-dark-ink-faint: rgb(239 231 250 / 0.52);
+  --color-dark-border: rgb(239 231 250 / 0.14);
+  --color-dark-border-strong: rgb(239 231 250 / 0.28);
 
-  /* Neutrals — dark mode.
-     Drives intentionally dark sections (hero, lifecycle band) today, and is
-     ready to back a global dark theme later. */
-  --color-dark-background: #120e1b; /* Warm near-black, purple-tinted       */
-  --color-dark-surface: #1c172b; /* Cards, bento cells, inputs on dark      */
-  --color-dark-surface-2: #241d33; /* Nested surfaces on dark               */
-  --color-dark-ink: #efe7fa; /* Primary text on dark — off-white            */
-  --color-dark-ink-soft: rgb(239 231 250 / 0.72); /* Body copy on dark      */
-  --color-dark-ink-faint: rgb(239 231 250 / 0.52); /* Captions on dark      */
-  --color-dark-border: rgb(239 231 250 / 0.14); /* Hairlines on dark        */
-  --color-dark-border-strong: rgb(239 231 250 / 0.28); /* Hover on dark     */
+  /* Families */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
-  /* ---------- 02 · TYPOGRAPHY ------------------------------------------ */
-
-  /* A warm editorial serif for display moments, a clean grotesk for
-     everything functional, and a mono for data, tags and eyebrows. */
-  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman",
-    serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
-
-  /* Display — Fraunces · headlines & hero copy · 96 / 104 */
+  /* Type scale. Each token carries its own line-height, tracking and weight. */
   --text-display: 6rem;
   --text-display--line-height: 6.5rem;
   --text-display--letter-spacing: -0.02em;
   --text-display--font-weight: 500;
 
-  /* Display, mobile · 44 / 48 */
   --text-display-sm: 2.75rem;
   --text-display-sm--line-height: 3rem;
   --text-display-sm--letter-spacing: -0.02em;
   --text-display-sm--font-weight: 500;
 
-  /* H1 / Section — Fraunces · 52 / 56 */
   --text-h1: 3.25rem;
   --text-h1--line-height: 3.5rem;
   --text-h1--letter-spacing: -0.01em;
   --text-h1--font-weight: 600;
 
-  /* H2 / Card — Inter · 22 / 28 */
   --text-h2: 1.375rem;
   --text-h2--line-height: 1.75rem;
   --text-h2--letter-spacing: -0.01em;
   --text-h2--font-weight: 600;
 
-  /* Body / Large — Inter · 20 / 32 */
   --text-body-lg: 1.25rem;
   --text-body-lg--line-height: 2rem;
   --text-body-lg--font-weight: 400;
 
-  /* Body / Base — Inter · 16 / 26 */
   --text-body: 1rem;
   --text-body--line-height: 1.625rem;
   --text-body--font-weight: 400;
 
-  /* Body / Small — Inter · 13.5 / 20 */
   --text-body-sm: 0.84375rem;
   --text-body-sm--line-height: 1.25rem;
   --text-body-sm--font-weight: 500;
 
-  /* Button Label — Inter · 14 / 100% */
   --text-button: 0.875rem;
   --text-button--line-height: 1;
   --text-button--font-weight: 600;
 
-  /* Eyebrow / Tag — Plex Mono · 11.5 / 100% · uppercase */
   --text-eyebrow: 0.71875rem;
   --text-eyebrow--line-height: 1;
   --text-eyebrow--letter-spacing: 0.14em;
   --text-eyebrow--font-weight: 500;
 
-  /* Caption / Meta — Plex Mono · 11 / 16 */
   --text-caption: 0.6875rem;
   --text-caption--line-height: 1rem;
   --text-caption--font-weight: 400;
 
-  /* ---------- 03 · RADIUS & ELEVATION ---------------------------------- */
-  --radius-sm: 11px;
+  /* Radius — buttons 8, cards 12, media 28 */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
   --radius-md: 18px;
   --radius-lg: 28px;
   --radius-pill: 999px;
@@ -116,10 +98,8 @@
   --shadow-lift: 0 2px 4px rgb(21 18 28 / 0.05),
     0 20px 48px -20px rgb(21 18 28 / 0.28);
 
-  /* ---------- 04 · RATIOS ---------------------------------------------- */
   --aspect-portrait: 4 / 5;
 
-  /* ---------- 05 · MOTION ---------------------------------------------- */
   --animate-marquee: marquee 42s linear infinite;
 
   @keyframes marquee {
@@ -131,10 +111,6 @@
     }
   }
 }
-
-/* ==========================================================================
-   BASE
-   ========================================================================== */
 
 @layer base {
   html {
@@ -150,6 +126,13 @@
     line-height: var(--text-body--line-height);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
   }
 
   ::selection {
@@ -172,11 +155,6 @@
   }
 }
 
-/* ==========================================================================
-   BRAND GRADIENTS — hero / CTA moments only, never body decoration.
-   ========================================================================== */
-
-/* purple-light → purple-deep-2 → purple-deep */
 @utility gradient-brand {
   background-image: linear-gradient(
     100deg,
@@ -186,39 +164,41 @@
   );
 }
 
-/* Deep, atmospheric purple for the hero band. */
 @utility gradient-hero {
-  background-color: var(--color-dark-background);
+  background-color: var(--color-purple-ink);
   background-image:
     radial-gradient(
-      72% 130% at 12% -10%,
+      74% 132% at 10% -12%,
       var(--color-purple-deep-2) 0%,
-      transparent 58%
+      transparent 60%
     ),
     radial-gradient(
-      56% 104% at 90% 24%,
-      var(--color-purple-deep) 0%,
-      transparent 64%
+      62% 110% at 92% 22%,
+      var(--color-purple-ink) 0%,
+      transparent 62%
+    ),
+    linear-gradient(
+      104deg,
+      transparent 40%,
+      var(--color-dark-background) 100%
     );
 }
 
-/* Flat deep-purple band — lifecycle, dark feature cells. */
 @utility gradient-deep {
-  background-color: var(--color-purple-deep);
+  background-color: var(--color-purple-ink);
   background-image: linear-gradient(
     132deg,
-    var(--color-purple-deep) 0%,
-    var(--color-purple-deep) 44%,
+    var(--color-purple-ink) 0%,
+    var(--color-purple-ink) 46%,
     color-mix(
         in oklab,
-        var(--color-purple-deep) 74%,
+        var(--color-purple-ink) 76%,
         var(--color-dark-background)
       )
       100%
   );
 }
 
-/* A soft top-left highlight that gives flat brand fills some depth. */
 @utility sheen {
   background-image: radial-gradient(
     62% 82% at 18% 8%,
@@ -227,7 +207,6 @@
   );
 }
 
-/* Fades an overflowing row (marquee) out at both edges. */
 @utility mask-edges {
   mask-image: linear-gradient(
     to right,

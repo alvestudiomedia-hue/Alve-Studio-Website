@@ -5,7 +5,6 @@ import { Footer } from "@/components/layout/Footer";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-/* Display — headlines & hero copy. Italic carries the emphasis word. */
 const fraunces = Fraunces({
   subsets: ["latin"],
   display: "swap",
@@ -14,14 +13,12 @@ const fraunces = Fraunces({
   axes: ["opsz"],
 });
 
-/* Body — all UI text, paragraphs, buttons, nav. */
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 });
 
-/* Utility — eyebrows, tags, stats labels, footer meta. */
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   display: "swap",

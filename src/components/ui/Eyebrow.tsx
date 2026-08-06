@@ -3,12 +3,10 @@ import { cn } from "@/lib/cn";
 
 type EyebrowProps = {
   children: ReactNode;
-  /** `dot` prefixes the small bullet used across the design system. */
   variant?: "plain" | "dot" | "chip";
   className?: string;
 };
 
-/** Eyebrow / Tag — Plex Mono, uppercase, 0.14em tracking. */
 export function Eyebrow({
   children,
   variant = "plain",

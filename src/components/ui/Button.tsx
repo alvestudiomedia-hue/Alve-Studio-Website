@@ -7,42 +7,40 @@ import type {
 import { cn } from "@/lib/cn";
 
 export type ButtonVariant =
-  /** Filled purple. The default call to action on light surfaces. */
   | "primary"
-  /** White card on a hairline border. Pairs with `primary` on light. */
   | "secondary"
-  /** Filled off-white. The default call to action on dark surfaces. */
   | "light"
-  /** Hairline outline. Pairs with `light` on dark surfaces. */
   | "outline"
-  /** No chrome until hovered. Tertiary actions, nav items. */
-  | "ghost";
+  | "ghost"
+  | "dark";
 
 export type ButtonSize = "sm" | "md" | "lg";
 
 const base =
-  "group/btn inline-flex shrink-0 items-center justify-center gap-2 rounded-pill font-sans text-button whitespace-nowrap " +
-  "transition-[background-color,border-color,color,box-shadow] duration-200 ease-out " +
+  "group/btn inline-flex shrink-0 items-center justify-center gap-2.5 rounded-xs font-sans text-button whitespace-nowrap cursor-pointer " +
+  "transition-all duration-200 ease-out " +
   "focus-visible:outline-2 focus-visible:outline-offset-2 " +
   "disabled:pointer-events-none disabled:opacity-45";
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-purple-deep text-surface hover:bg-purple-deep-2 focus-visible:outline-purple-deep",
+    "bg-purple-deep text-surface hover:bg-purple-deep-2 hover:shadow-soft focus-visible:outline-purple-deep",
   secondary:
     "border border-border bg-surface text-ink hover:border-border-strong hover:bg-surface-2 focus-visible:outline-purple-deep",
   light:
-    "bg-dark-ink text-ink hover:bg-purple-tint focus-visible:outline-dark-ink",
+    "bg-surface text-purple-deep hover:bg-purple-tint focus-visible:outline-dark-ink",
   outline:
-    "border border-dark-border-strong text-dark-ink hover:border-dark-ink hover:bg-dark-ink/10 focus-visible:outline-dark-ink",
+    "border border-dark-border-strong bg-transparent text-dark-ink hover:border-dark-ink hover:bg-dark-ink/10 focus-visible:outline-dark-ink",
   ghost:
     "text-ink hover:bg-purple-tint hover:text-purple-deep focus-visible:outline-purple-deep",
+  dark: "bg-ink text-surface hover:bg-ink-soft hover:shadow-soft focus-visible:outline-ink",
 };
 
+/* Only height and padding scale — the label stays 14 / 600 at every size. */
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "h-9 px-4",
-  md: "h-11 px-5",
-  lg: "h-13 px-7",
+  sm: "h-9.5 px-4.5",
+  md: "h-11.5 px-6",
+  lg: "h-13.5 px-8",
 };
 
 type StyleOptions = {
@@ -52,7 +50,7 @@ type StyleOptions = {
   className?: string;
 };
 
-/** Exposed so non-button elements can borrow the exact button look. */
+/** Exposed so non-button elements can borrow the button look. */
 export function buttonStyles({
   variant = "primary",
   size = "md",
@@ -88,12 +86,7 @@ export type ButtonProps = ButtonElementProps | AnchorElementProps;
 
 const isExternal = (href: string) => /^(https?:|mailto:|tel:)/.test(href);
 
-/**
- * The single button in the system.
- *
- * Renders a `<button>` by default, a Next `<Link>` when given an internal
- * `href`, and a plain `<a>` for external destinations.
- */
+/** Renders a `<button>`, a Next `<Link>` for internal hrefs, or `<a>` for external. */
 export function Button(props: ButtonProps) {
   const {
     variant,

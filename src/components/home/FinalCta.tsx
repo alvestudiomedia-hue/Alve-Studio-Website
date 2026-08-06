@@ -7,7 +7,7 @@ export function FinalCta() {
     <Section tone="tint">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-display-sm text-purple-deep text-balance lg:text-h1">
+          <h2 className="font-display text-display-sm text-purple-ink text-balance lg:text-h1">
             Ready to Stop Juggling Vendors?
           </h2>
 

@@ -1,103 +1,79 @@
-import type { ComponentType, SVGProps } from "react";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import {
-  BadgeCheck,
-  BarChart,
-  CheckCircle,
-  Clipboard,
-  Code,
-  Sparkle,
-} from "@/components/ui/icons";
+import { CheckCircle } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 
 type Solution = {
   title: string;
-  icon: ComponentType<SVGProps<SVGSVGElement>>;
   items: string[];
-  /** Renders across two columns with a two-up item list. */
   wide?: boolean;
 };
 
 const solutions: Solution[] = [
   {
     title: "Growth & Marketing",
-    icon: BarChart,
     items: [
-      "SEO & performance marketing",
-      "Conversion rate optimisation",
-      "Product-led growth strategy",
+      "SEO & Performance Marketing",
+      "Conversion Rate Optimization",
+      "Product-Led Growth Strategy",
     ],
   },
   {
     title: "Web & Development",
-    icon: Code,
     items: [
-      "Modern web applications",
-      "Custom API integrations",
-      "Headless e-commerce solutions",
+      "Modern Web Applications",
+      "Custom API Integrations",
+      "Headless E-commerce Solutions",
     ],
   },
   {
     title: "QA & Testing",
-    icon: BadgeCheck,
     items: [
-      "Automated end-to-end testing",
-      "Security vulnerability audits",
-      "Performance & load testing",
+      "Automated End-to-End Testing",
+      "Security Vulnerability Audits",
+      "Performance & Load Testing",
     ],
   },
   {
     title: "Project Delivery",
-    icon: Clipboard,
     items: [
-      "Agile management office",
-      "Product roadmap definition",
-      "Resource optimisation",
+      "Agile Management Office",
+      "Product Roadmap Definition",
+      "Resource Optimization",
     ],
   },
   {
     title: "Creative Services",
-    icon: Sparkle,
     wide: true,
     items: [
-      "UX research & branding",
-      "Motion graphics & 3D",
-      "UI / visual interface design",
-      "Design system creation",
+      "UX Research & Branding",
+      "Motion Graphics & 3D",
+      "UI/Visual Interface Design",
+      "Design System Creation",
     ],
   },
 ];
 
 function SolutionCard({ solution }: { solution: Solution }) {
-  const Icon = solution.icon;
-
   return (
     <article
       className={cn(
-        "rounded-md border border-border bg-surface p-7 transition-colors duration-200 hover:border-border-strong",
+        "rounded-sm border border-border bg-surface p-7 transition-colors duration-200 hover:border-border-strong",
         solution.wide && "lg:col-span-2",
       )}
     >
-      <div className="flex items-center gap-3">
-        <span className="inline-flex size-9 items-center justify-center rounded-sm bg-purple-tint text-purple-deep">
-          <Icon className="size-4.5" />
-        </span>
-        <h3 className="text-h2 text-purple-deep">{solution.title}</h3>
-      </div>
+      <h3 className="text-h2 text-purple-ink">{solution.title}</h3>
 
       <ul
         className={cn(
           "mt-6 space-y-3.5",
-          solution.wide && "sm:grid sm:grid-cols-2 sm:gap-x-8 sm:space-y-0 sm:gap-y-3.5",
+          solution.wide &&
+            "sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-3.5 sm:space-y-0",
         )}
       >
         {solution.items.map((item) => (
           <li key={item} className="flex items-start gap-2.5">
-            <CheckCircle
-              className="mt-0.5 size-4 shrink-0 text-purple-light"
-              aria-hidden="true"
-            />
+            <CheckCircle className="mt-1 size-3.5 shrink-0 text-purple-mid" />
             <span className="text-body-sm text-ink-soft">{item}</span>
           </li>
         ))}
@@ -110,11 +86,11 @@ export function Solutions() {
   return (
     <Section tone="background">
       <Container>
-        <h2 className="max-w-2xl font-display text-display-sm text-purple-deep text-balance lg:text-h1">
+        <h2 className="max-w-2xl font-display text-display-sm text-purple-ink text-balance lg:text-h1">
           Digital Solutions Designed Around Your Business
         </h2>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {solutions.map((solution) => (
             <SolutionCard key={solution.title} solution={solution} />
           ))}

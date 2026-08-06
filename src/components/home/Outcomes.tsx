@@ -13,19 +13,20 @@ export function Outcomes() {
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <MediaFrame
-            alt="Inside the Alve studio"
+            src="/images/outcomes-team.png"
+            alt="Alve Studio product team collaborating"
             ratio="video"
             className="lg:order-first"
           />
 
           <div>
-            <h2 className="font-display text-display-sm text-purple-deep text-balance lg:text-h1">
+            <h2 className="font-display text-display-sm text-purple-ink text-balance lg:text-h1">
               We Don&apos;t Just Build Products. We Build Outcomes.
             </h2>
 
             <p className="mt-7 text-body text-ink-soft text-pretty">
               We bridge the gap between technical complexity and business
-              growth. Most agencies specialise in a silo; Alve Studio is built
+              growth. Most agencies specialize in a silo; Alve Studio is built
               for the entire lifecycle. Our approach integrates strategy,
               design, and development to ensure your product doesn&apos;t just
               work — it wins.
@@ -36,7 +37,7 @@ export function Outcomes() {
                 <div key={stat.label}>
                   <dt className="sr-only">{stat.label}</dt>
                   <dd>
-                    <span className="block font-display text-h1 text-purple-deep">
+                    <span className="block font-display text-h1 text-purple-ink">
                       {stat.value}
                     </span>
                     <span

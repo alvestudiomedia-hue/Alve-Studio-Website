@@ -15,7 +15,7 @@ export function Industries() {
       className="border-y border-border bg-surface py-6"
     >
       <div className="mask-edges flex overflow-hidden">
-        {/* Two identical tracks so the loop is seamless at -50%. */}
+        {/* Two tracks so the loop is seamless at -50%. */}
         {[0, 1].map((track) => (
           <ul
             key={track}
