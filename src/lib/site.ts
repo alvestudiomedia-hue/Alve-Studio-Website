@@ -22,7 +22,17 @@ export const primaryNav: NavLink[] = [
   { label: "About", href: "/about" },
   { label: "Portfolio", href: "/#portfolio" },
   { label: "Process", href: "/#process" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
+];
+
+export const serviceNav: NavLink[] = [
+  { label: "Growth & Marketing", href: "/#growth-marketing" },
+  { label: "Web & Development", href: "/#web-development" },
+  { label: "QA & Testing", href: "/#qa-testing" },
+  { label: "Project Delivery", href: "/services/project-delivery" },
+  { label: "Creative Services", href: "/services/creative-services" },
+  { label: "Field Marketing", href: "/services/field-marketing" },
 ];
 
 export const footerNav: { title: string; links: NavLink[] }[] = [
@@ -31,24 +41,20 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
     links: [
       { label: "Home", href: "/" },
       { label: "About", href: "/about" },
-      { label: "Portfolio", href: "/portfolio" },
-      { label: "Process", href: "/process" },
+      { label: "Portfolio", href: "/#portfolio" },
+      { label: "Process", href: "/#process" },
       { label: "Contact", href: "/contact" },
     ],
   },
   {
     title: "Expertise",
-    links: [
-      { label: "Strategy", href: "/services/strategy" },
-      { label: "Design", href: "/services/design" },
-      { label: "Development", href: "/services/development" },
-      { label: "Growth", href: "/services/growth" },
-    ],
+    links: serviceNav,
   },
   {
     title: "Resources",
     links: [
       { label: "Blog", href: "/blog" },
+      { label: "Pricing", href: "/pricing" },
       { label: "Careers", href: "/careers" },
       { label: "Privacy Policy", href: "/privacy" },
     ],

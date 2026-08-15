@@ -4,6 +4,7 @@ import { CheckCircle } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 
 type Solution = {
+  id: string;
   title: string;
   items: string[];
   wide?: boolean;
@@ -11,6 +12,7 @@ type Solution = {
 
 const solutions: Solution[] = [
   {
+    id: "growth-marketing",
     title: "Growth & Marketing",
     items: [
       "SEO & Performance Marketing",
@@ -19,6 +21,7 @@ const solutions: Solution[] = [
     ],
   },
   {
+    id: "web-development",
     title: "Web & Development",
     items: [
       "Modern Web Applications",
@@ -27,6 +30,7 @@ const solutions: Solution[] = [
     ],
   },
   {
+    id: "qa-testing",
     title: "QA & Testing",
     items: [
       "Automated End-to-End Testing",
@@ -35,6 +39,7 @@ const solutions: Solution[] = [
     ],
   },
   {
+    id: "project-delivery",
     title: "Project Delivery",
     items: [
       "Agile Management Office",
@@ -43,6 +48,7 @@ const solutions: Solution[] = [
     ],
   },
   {
+    id: "creative-services",
     title: "Creative Services",
     wide: true,
     items: [
@@ -57,8 +63,9 @@ const solutions: Solution[] = [
 function SolutionCard({ solution }: { solution: Solution }) {
   return (
     <article
+      id={solution.id}
       className={cn(
-        "rounded-sm border border-border bg-surface p-9 transition-colors duration-200 hover:border-border-strong",
+        "scroll-mt-30 rounded-sm border border-border bg-surface p-9 transition-colors duration-200 hover:border-border-strong",
         solution.wide && "lg:col-span-2",
       )}
     >

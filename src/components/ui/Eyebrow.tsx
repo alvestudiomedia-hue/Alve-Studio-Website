@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 
 type EyebrowProps = {
   children: ReactNode;
-  variant?: "plain" | "dot" | "chip";
+  variant?: "plain" | "dot" | "line" | "chip";
   className?: string;
 };
 
@@ -36,6 +36,11 @@ export function Eyebrow({
         <span
           aria-hidden="true"
           className="size-1.5 rounded-pill bg-current opacity-70"
+        />
+      ) : variant === "line" ? (
+        <span
+          aria-hidden="true"
+          className="h-0.5 w-[18px] rounded-pill bg-current"
         />
       ) : null}
       {children}
