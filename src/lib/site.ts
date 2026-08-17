@@ -26,6 +26,15 @@ export const primaryNav: NavLink[] = [
   { label: "Contact", href: "/contact" },
 ];
 
+export const serviceNav: NavLink[] = [
+  { label: "Growth", href: "/services/growth-marketing" },
+  { label: "Development", href: "/services/web-development" },
+  { label: "QA & Testing", href: "/services/qa-testing" },
+  { label: "Field Marketing", href: "/services/field-marketing" },
+  { label: "Project Delivery", href: "/services/project-delivery" },
+  { label: "Creative Services", href: "/services/creative-services" },
+];
+
 /* Mirrors the footer in the design pages. Every href resolves to a page that
    exists or has a design in place — labels without one are left out. */
 export const footerNav: { title: string; links: NavLink[] }[] = [
