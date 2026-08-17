@@ -16,47 +16,49 @@ export type NavLink = {
   href: string;
 };
 
-/* Portfolio and Process are jump links into home-page sections, not routes. */
+/* Process is still a jump into a home-page section; everything else is a route. */
 export const primaryNav: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Portfolio", href: "/#portfolio" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Process", href: "/#process" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
 ];
 
-export const serviceNav: NavLink[] = [
-  { label: "Growth & Marketing", href: "/#growth-marketing" },
-  { label: "Web & Development", href: "/#web-development" },
-  { label: "QA & Testing", href: "/#qa-testing" },
-  { label: "Project Delivery", href: "/services/project-delivery" },
-  { label: "Creative Services", href: "/services/creative-services" },
-  { label: "Field Marketing", href: "/services/field-marketing" },
-];
-
+/* Mirrors the footer in the design pages. Every href resolves to a page that
+   exists or has a design in place — labels without one are left out. */
 export const footerNav: { title: string; links: NavLink[] }[] = [
   {
     title: "Studio",
     links: [
       { label: "Home", href: "/" },
       { label: "About", href: "/about" },
-      { label: "Portfolio", href: "/#portfolio" },
+      { label: "Portfolio", href: "/portfolio" },
       { label: "Process", href: "/#process" },
       { label: "Contact", href: "/contact" },
     ],
   },
   {
     title: "Expertise",
-    links: serviceNav,
+    links: [
+      { label: "Growth", href: "/services/growth-marketing" },
+      { label: "Development", href: "/services/web-development" },
+      { label: "QA & Testing", href: "/services/qa-testing" },
+    ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Blog", href: "/blog" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "Careers", href: "/careers" },
-      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Case Studies", href: "/portfolio" },
+      { label: "Testimonials", href: "/testimonials" },
+    ],
+  },
+  {
+    title: "Connect",
+    links: [
+      { label: "Start a Project", href: "/contact" },
+      { label: "Book a Call", href: "/contact" },
     ],
   },
 ];
