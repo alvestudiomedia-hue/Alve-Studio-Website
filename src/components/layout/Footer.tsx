@@ -10,7 +10,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-surface-3">
       <Container className="py-16 md:py-24">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_repeat(3,1fr)] lg:gap-8">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_repeat(4,1fr)] lg:gap-8">
           <div className="max-w-xs">
             <Logo />
             <p className="mt-5 text-body-sm text-ink-soft">
@@ -46,7 +46,7 @@ export function Footer() {
               </h2>
               <ul className="mt-5 space-y-3">
                 {group.links.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.label}>
                     <Link
                       href={link.href}
                       className="text-body-sm text-ink-soft transition-colors duration-200 hover:text-purple-deep"

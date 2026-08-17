@@ -104,6 +104,64 @@ export function Close(props: IconProps) {
   );
 }
 
+export function Bank(props: IconProps) {
+  return (
+    <Stroke {...props}>
+      <path d="M3 9.5 12 4l9 5.5" />
+      <path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8" />
+      <path d="M3 20h18" />
+    </Stroke>
+  );
+}
+
+export function Truck(props: IconProps) {
+  return (
+    <Stroke {...props}>
+      <path d="M3 6h11v10H3z" />
+      <path d="M14 9h4l3 3.5V16h-7z" />
+      <circle cx="7" cy="18" r="1.8" />
+      <circle cx="17" cy="18" r="1.8" />
+    </Stroke>
+  );
+}
+
+export function CreditCard(props: IconProps) {
+  return (
+    <Stroke {...props}>
+      <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+      <path d="M2.5 10h19" />
+      <path d="M6 15h3.5" />
+    </Stroke>
+  );
+}
+
+export function School(props: IconProps) {
+  return (
+    <Stroke {...props}>
+      <path d="M12 4 2.5 9 12 14l9.5-5z" />
+      <path d="M6.5 11.5V17c0 1.4 2.5 2.5 5.5 2.5s5.5-1.1 5.5-2.5v-5.5" />
+      <path d="M21.5 9v5" />
+    </Stroke>
+  );
+}
+
+export function Megaphone(props: IconProps) {
+  return (
+    <Stroke {...props}>
+      <path d="M4 10v4a1.5 1.5 0 0 0 1.5 1.5H8l7 4.5V4L8 8.5H5.5A1.5 1.5 0 0 0 4 10Z" />
+      <path d="M18.5 9a4 4 0 0 1 0 6" />
+    </Stroke>
+  );
+}
+
+export function Plus(props: IconProps) {
+  return (
+    <Stroke {...props}>
+      <path d="M12 5v14M5 12h14" />
+    </Stroke>
+  );
+}
+
 function Brand({ children, ...props }: IconProps) {
   return (
     <svg
