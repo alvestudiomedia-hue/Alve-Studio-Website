@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Close, Menu } from "@/components/ui/icons";
 import { Logo } from "@/components/layout/Logo";
-import { primaryNav } from "@/lib/site";
+import { primaryNav, serviceNav } from "@/lib/site";
 import { cn } from "@/lib/cn";
 
 type NavbarProps = {
@@ -111,36 +112,66 @@ export function Navbar({
 
         <nav
           aria-label="Primary"
-          className="hidden items-center gap-9 lg:flex"
+          className="hidden items-center gap-7 min-[901px]:flex"
         >
-          {primaryNav.map((link) => {
+          {primaryNav.map((link, index) => {
             const active = isActive(pathname, link.href, section);
 
             return (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={
-                  active
-                    ? link.href.includes("#")
-                      ? "location"
-                      : "page"
-                    : undefined
-                }
-                className={cn(
-                  "relative py-2 text-body-sm transition-colors duration-200",
-                  active ? "text-ink" : "text-ink-muted hover:text-ink",
-                )}
-              >
-                {link.label}
-                <span
-                  aria-hidden="true"
+              <Fragment key={link.href}>
+                <Link
+                  href={link.href}
+                  aria-current={
+                    active
+                      ? link.href.includes("#")
+                        ? "location"
+                        : "page"
+                      : undefined
+                  }
                   className={cn(
-                    "absolute inset-x-0 -bottom-0.5 h-0.5 rounded-pill bg-purple-deep transition-opacity duration-200",
-                    active ? "opacity-100" : "opacity-0",
+                    "relative py-2 text-body-sm transition-colors duration-200",
+                    active ? "text-ink" : "text-ink-muted hover:text-ink",
                   )}
-                />
-              </Link>
+                >
+                  {link.label}
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "absolute inset-x-0 -bottom-0.5 h-0.5 rounded-pill bg-purple-deep transition-opacity duration-200",
+                      active ? "opacity-100" : "opacity-0",
+                    )}
+                  />
+                </Link>
+
+                {index === 0 ? (
+                  <div className="group relative py-2">
+                    <button
+                      type="button"
+                      aria-haspopup="true"
+                      className={cn(
+                        "flex items-center gap-1 text-body-sm transition-colors duration-200",
+                        pathname.startsWith("/services/")
+                          ? "text-ink"
+                          : "text-ink-muted hover:text-ink",
+                      )}
+                    >
+                      Services
+                      <ChevronDown className="size-4 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
+                    </button>
+                    <div className="invisible absolute top-full left-1/2 z-20 grid w-[410px] -translate-x-1/2 translate-y-2 grid-cols-2 gap-1 rounded-md border border-border bg-surface p-2 opacity-0 shadow-lift transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                      {serviceNav.map((service) => (
+                        <Link
+                          key={service.label}
+                          href={service.href}
+                          className="rounded-sm px-3 py-2.5 text-body-sm text-ink-soft transition-colors hover:bg-purple-tint hover:text-purple-deep"
+                        >
+                          {service.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </Fragment>
             );
           })}
         </nav>
@@ -156,7 +187,7 @@ export function Navbar({
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="inline-flex size-10 items-center justify-center rounded-sm text-ink transition-colors duration-200 hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-deep lg:hidden"
+            className="inline-flex size-10 items-center justify-center rounded-sm text-ink transition-colors duration-200 hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-deep min-[901px]:hidden"
           >
             {open ? <Close /> : <Menu />}
           </button>
@@ -167,9 +198,30 @@ export function Navbar({
       <div
         id="mobile-nav"
         hidden={!open}
-        className="border-t border-border bg-surface lg:hidden"
+        className="border-t border-border bg-surface min-[901px]:hidden"
       >
         <Container className="flex flex-col gap-1 py-4">
+          <p className="px-3 pt-2 font-sans text-eyebrow uppercase text-ink-faint">
+            Services
+          </p>
+          <div className="mb-3 grid grid-cols-1 gap-1 sm:grid-cols-2">
+            {serviceNav.map((service) => (
+              <Link
+                key={service.label}
+                href={service.href}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "rounded-sm px-3 py-2.5 text-body-sm transition-colors duration-200",
+                  pathname === service.href
+                    ? "bg-purple-tint text-purple-deep"
+                    : "text-ink-soft hover:bg-surface-2 hover:text-ink",
+                )}
+              >
+                {service.label}
+              </Link>
+            ))}
+          </div>
+
           {primaryNav.map((link) => {
             const active = isActive(pathname, link.href, section);
 

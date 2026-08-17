@@ -19,7 +19,7 @@ const infoSections = [
       {
         icon: Clock,
         label: 'STUDIO HOURS',
-        value: 'Monday – Friday\n9:00 AM – 6:00 PM CST',
+        value: 'Monday – Friday\n9:00 AM – 6:00 PM WAT',
       },
     ],
   },

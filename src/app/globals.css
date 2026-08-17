@@ -14,6 +14,19 @@
   --color-purple-pale: var(--purple-pale);
   --color-purple-tint: var(--purple-tint);
 
+  /* Imported service-page template */
+  --color-service-ink: var(--service-ink);
+  --color-service-ink-soft: var(--service-ink-soft);
+  --color-service-deep: var(--service-deep);
+  --color-service-deep-2: var(--service-deep-2);
+  --color-service-accent-dark: var(--service-accent-dark);
+  --color-service-accent: var(--service-accent);
+  --color-service-accent-hover: var(--service-accent-hover);
+  --color-service-accent-light: var(--service-accent-light);
+  --color-service-lavender: var(--service-lavender);
+  --color-service-paper: var(--service-paper);
+  --color-service-line: var(--service-line);
+
   /* Neutrals — light */
   --color-background: var(--background);
   --color-surface: var(--surface);
@@ -40,6 +53,7 @@
   --font-display: var(--font-display-family);
   --font-sans: var(--font-sans-family);
   --font-mono: var(--font-mono-family);
+  --font-service: var(--font-service-family);
 
   /* Type scale — each token carries its line-height, tracking and weight */
   --text-display: var(--type-display-size);
@@ -101,6 +115,8 @@
 
   --shadow-soft: var(--elevation-soft);
   --shadow-lift: var(--elevation-lift);
+  --shadow-service-card: var(--service-shadow-card);
+  --shadow-service-pop: var(--service-shadow-pop);
 
   /* Ratios & motion */
   --aspect-portrait: var(--ratio-portrait);
@@ -125,6 +141,19 @@
   --purple-light: rgba(140, 90, 194, 1);
   --purple-pale: rgba(209, 188, 255, 1);
   --purple-tint: rgba(239, 231, 248, 1);
+
+  /* ---- Imported service-page palette ---- */
+  --service-ink: #150c2b;
+  --service-ink-soft: #4b4363;
+  --service-deep: #180a38;
+  --service-deep-2: #241150;
+  --service-accent-dark: #47188c;
+  --service-accent: #7c3fe0;
+  --service-accent-hover: #6c2fd0;
+  --service-accent-light: #9b6fe8;
+  --service-lavender: #f2ecfb;
+  --service-paper: #fdfcfe;
+  --service-line: rgba(21, 12, 43, 0.1);
 
   /* ---- Neutrals — light ---- */
   --background: rgba(254, 247, 255, 1);
@@ -152,6 +181,7 @@
   --font-display-family: var(--font-fraunces), ui-serif, Georgia, serif;
   --font-sans-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono-family: var(--font-plex-mono), ui-monospace, monospace;
+  --font-service-family: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
 
   /* ---- Type scale ---- */
   --type-display-size: 6rem;
@@ -218,6 +248,9 @@
     0 10px 30px -14px rgba(21, 18, 28, 0.18);
   --elevation-lift: 0 2px 4px rgba(21, 18, 28, 0.05),
     0 20px 48px -20px rgba(21, 18, 28, 0.28);
+  --service-shadow-card: 0 1px 2px rgba(21, 12, 43, 0.04),
+    0 12px 32px -16px rgba(36, 17, 80, 0.18);
+  --service-shadow-pop: 0 8px 24px -8px rgba(124, 63, 224, 0.45);
 
   /* ---- Ratios & motion ---- */
   --ratio-portrait: 4 / 5;
@@ -291,6 +324,16 @@
     var(--purple-ink) 0%,
     var(--purple-ink) 46%,
     color-mix(in oklab, var(--purple-ink) 76%, var(--dark-background)) 100%
+  );
+}
+
+@utility service-deep-gradient {
+  background-color: var(--service-deep);
+  background-image: radial-gradient(
+    120% 140% at 15% -10%,
+    #33196b 0%,
+    var(--service-deep) 55%,
+    #120627 100%
   );
 }
 
