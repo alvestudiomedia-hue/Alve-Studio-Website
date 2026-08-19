@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ArrowRight, Calendar as CalendarIcon, X, Plus, CheckCircle2 } from 'lucide-react';
 
@@ -15,6 +15,72 @@ type FormData = {
   privacyPolicy: boolean;
 };
 
+const SERVICE_BUDGET_RANGES: Record<string, { value: string; label: string }[]> = {
+  'growth-marketing': [
+    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
+    { value: '1.5m-2m', label: '₦1,500,000 – ₦2,000,000' },
+    { value: '2m+', label: '₦2,000,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+  'web-development': [
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
+    { value: '1.5m-2m', label: '₦1,500,000 – ₦2,000,000' },
+    { value: '2m-3m', label: '₦2,000,000 – ₦3,000,000' },
+    { value: '3m+', label: '₦3,000,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+  'qa-testing': [
+    { value: '300k-500k', label: '₦300,000 – ₦500,000' },
+    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m+', label: '₦1,000,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+  'project-delivery': [
+    { value: '400k-500k', label: '₦400,000 – ₦500,000' },
+    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
+    { value: '1.5m+', label: '₦1,500,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+  'creative-services': [
+    { value: '350k-500k', label: '₦350,000 – ₦500,000' },
+    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
+    { value: '1.5m+', label: '₦1,500,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+  'field-marketing': [
+    { value: '350k-500k', label: '₦350,000 – ₦500,000' },
+    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
+    { value: '1.5m+', label: '₦1,500,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+};
+
+const DEFAULT_BUDGET_RANGES = [
+  { value: '300k-500k', label: '₦300,000 – ₦500,000' },
+  { value: '500k-1m', label: '₦500,000 – ₦1,000,000' },
+  { value: '1m-2m', label: '₦1,000,000 – ₦2,000,000' },
+  { value: '2m-3m', label: '₦2,000,000 – ₦3,000,000' },
+  { value: '3m+', label: '₦3,000,000+' },
+  { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+  { value: 'need-guidance', label: 'Not sure — I need guidance' },
+];
+
 export default function ContactForm() {
   const [preferredDates, setPreferredDates] = useState<string[]>([]);
   const [dateInput, setDateInput] = useState('');
@@ -24,6 +90,8 @@ export default function ContactForm() {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<FormData>({
@@ -38,6 +106,19 @@ export default function ContactForm() {
       privacyPolicy: false,
     },
   });
+
+  const selectedService = watch('requiredService');
+
+  // Reset budget if currently selected budget is not valid for newly selected service
+  useEffect(() => {
+    if (selectedService && SERVICE_BUDGET_RANGES[selectedService]) {
+      const validValues = SERVICE_BUDGET_RANGES[selectedService].map((o) => o.value);
+      const currentBudget = watch('projectBudget');
+      if (currentBudget && !validValues.includes(currentBudget)) {
+        setValue('projectBudget', '');
+      }
+    }
+  }, [selectedService, setValue, watch]);
 
   const handleAddDate = () => {
     setDateError(null);
@@ -189,19 +270,32 @@ export default function ContactForm() {
 
         {/* Project Budget */}
         <div>
-          <label htmlFor="projectBudget" className="block text-sm font-medium text-ink mb-1">
-            Project Budget
-          </label>
+          <div className="flex items-center justify-between mb-1">
+            <label htmlFor="projectBudget" className="block text-sm font-medium text-ink">
+              Project Budget
+            </label>
+            {selectedService && (
+              <span className="text-[11px] font-medium text-purple-mid animate-fadeIn">
+                Tailored to service
+              </span>
+            )}
+          </div>
           <select
             id="projectBudget"
             {...register('projectBudget', { required: 'Please select a budget range' })}
             className={inputClasses(!!errors.projectBudget)}
           >
-            <option value="">Select range</option>
-            <option value="10k-25k">$10,000 – $25,000</option>
-            <option value="25k-50k">$25,000 – $50,000</option>
-            <option value="50k-100k">$50,000 – $100,000</option>
-            <option value="100k+">$100,000+</option>
+            <option value="">
+              {selectedService ? 'Select budget range' : 'Select range (or choose service first)'}
+            </option>
+            {(selectedService && SERVICE_BUDGET_RANGES[selectedService]
+              ? SERVICE_BUDGET_RANGES[selectedService]
+              : DEFAULT_BUDGET_RANGES
+            ).map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
           </select>
           {errors.projectBudget && (
             <p className="mt-1 text-sm text-red-500">{errors.projectBudget.message}</p>
