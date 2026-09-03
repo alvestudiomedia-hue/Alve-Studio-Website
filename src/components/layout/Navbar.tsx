@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
@@ -45,7 +45,13 @@ export function Navbar({
 }: NavbarProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [section, setSection] = useState<string | null>(null);
+
+  const closeMobileMenu = useCallback(() => {
+    setOpen(false);
+    setMobileServicesOpen(false);
+  }, []);
 
   // Track which jump-target section is currently under the spy line.
   useEffect(() => {
@@ -90,7 +96,7 @@ export function Navbar({
     document.body.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") closeMobileMenu();
     };
     window.addEventListener("keydown", onKeyDown);
 
@@ -98,7 +104,7 @@ export function Navbar({
       document.body.style.overflow = previous;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [open]);
+  }, [closeMobileMenu, open]);
 
   return (
     <header
@@ -129,8 +135,8 @@ export function Navbar({
                       : undefined
                   }
                   className={cn(
-                    "relative py-2 text-body-sm transition-colors duration-200",
-                    active ? "text-ink" : "text-ink-muted hover:text-ink",
+                    "relative py-2 text-body-sm  transition-colors duration-200",
+                    "text-ink hover:text-ink",
                   )}
                 >
                   {link.label}
@@ -152,7 +158,7 @@ export function Navbar({
                         "flex items-center gap-1 text-body-sm transition-colors duration-200",
                         pathname.startsWith("/services/")
                           ? "text-ink"
-                          : "text-ink-muted hover:text-ink",
+                          : "text-ink hover:text-ink",
                       )}
                     >
                       Services
@@ -163,7 +169,7 @@ export function Navbar({
                         <Link
                           key={service.label}
                           href={service.href}
-                          className="rounded-sm px-3 py-2.5 text-body-sm text-ink-soft transition-colors hover:bg-purple-tint hover:text-purple-deep"
+                          className="rounded-sm px-3 py-2.5 text-body-sm text-ink transition-colors hover:bg-purple-tint hover:text-purple-deep"
                         >
                           {service.label}
                         </Link>
@@ -183,7 +189,10 @@ export function Navbar({
 
           <button
             type="button"
-            onClick={() => setOpen((value) => !value)}
+            onClick={() => {
+              if (open) closeMobileMenu();
+              else setOpen(true);
+            }}
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -201,20 +210,38 @@ export function Navbar({
         className="border-t border-border bg-surface min-[901px]:hidden"
       >
         <Container className="flex flex-col gap-1 py-4">
-          <p className="px-3 pt-2 font-sans text-eyebrow uppercase text-ink-faint">
-            Services
-          </p>
-          <div className="mb-3 grid grid-cols-1 gap-1 sm:grid-cols-2">
+          <button
+            type="button"
+            onClick={() => setMobileServicesOpen((value) => !value)}
+            aria-expanded={mobileServicesOpen}
+            aria-controls="mobile-services-menu"
+            className="flex items-center justify-between rounded-sm px-3 py-3 text-body text-ink transition-colors hover:bg-surface-2 hover:text-ink"
+          >
+            <span>Services</span>
+            <ChevronDown
+              aria-hidden="true"
+              className={cn(
+                "size-4 transition-transform duration-200",
+                mobileServicesOpen && "rotate-180",
+              )}
+            />
+          </button>
+
+          <div
+            id="mobile-services-menu"
+            hidden={!mobileServicesOpen}
+            className="mb-3 grid grid-cols-1 gap-1 pl-3 sm:grid-cols-2"
+          >
             {serviceNav.map((service) => (
               <Link
                 key={service.label}
                 href={service.href}
-                onClick={() => setOpen(false)}
+                onClick={closeMobileMenu}
                 className={cn(
                   "rounded-sm px-3 py-2.5 text-body-sm transition-colors duration-200",
                   pathname === service.href
                     ? "bg-purple-tint text-purple-deep"
-                    : "text-ink-soft hover:bg-surface-2 hover:text-ink",
+                    : "text-ink hover:bg-surface-2 hover:text-ink",
                 )}
               >
                 {service.label}
@@ -229,7 +256,7 @@ export function Navbar({
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={() => setOpen(false)}
+                onClick={closeMobileMenu}
                 aria-current={
                   active
                     ? link.href.includes("#")
@@ -241,7 +268,7 @@ export function Navbar({
                   "rounded-sm px-3 py-3 text-body transition-colors duration-200",
                   active
                     ? "bg-purple-tint text-purple-deep"
-                    : "text-ink-soft hover:bg-surface-2 hover:text-ink",
+                    : "text-ink hover:bg-surface-2 hover:text-ink",
                 )}
               >
                 {link.label}
@@ -249,7 +276,13 @@ export function Navbar({
             );
           })}
 
-          <Button href={ctaHref} size="md" fullWidth className="mt-3 sm:hidden">
+          <Button
+            href={ctaHref}
+            size="md"
+            fullWidth
+            onClick={closeMobileMenu}
+            className="mt-3 sm:hidden"
+          >
             {ctaLabel}
           </Button>
         </Container>

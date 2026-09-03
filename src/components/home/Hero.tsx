@@ -28,7 +28,7 @@ export function Hero() {
               Start Your Project
             </Button>
             <Button
-              href="/process"
+              href="/#process"
               variant="outline"
               size="lg"
               iconRight={<ArrowRight className="size-4" />}

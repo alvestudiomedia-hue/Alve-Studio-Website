@@ -29,7 +29,10 @@ export function ServiceHero({ name, hero }: ServiceHeroProps) {
           <span className="font-semibold text-white">{name}</span>
         </nav>
 
-        <div className="max-w-[720px] py-[clamp(3.5rem,7vw,5.5rem)] pt-10">
+        <div
+          className="max-w-[720px] py-[clamp(3.5rem,7vw,5.5rem)] pt-10"
+          data-aos="fade-up"
+        >
           <Eyebrow
             variant="line"
             className="font-service text-[0.72rem] font-semibold tracking-[0.14em] text-service-accent-light"

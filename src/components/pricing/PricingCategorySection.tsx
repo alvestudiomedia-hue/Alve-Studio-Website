@@ -14,7 +14,10 @@ export function PricingCategorySection({ category }: { category: PricingCategory
       )}
     >
       <Container>
-        <div className="mb-2.5 flex flex-wrap items-baseline gap-3">
+        <div
+          className="mb-2.5 flex flex-wrap items-baseline gap-3"
+          data-aos="fade-up"
+        >
           <span className="font-service text-[0.85rem] font-bold text-service-accent">
             {category.number}
           </span>
@@ -22,14 +25,17 @@ export function PricingCategorySection({ category }: { category: PricingCategory
             {category.title}
           </h2>
         </div>
-        <p className="mb-6 max-w-2xl text-service-ink-soft">{category.description}</p>
+        <p className="mb-6 max-w-2xl text-service-ink-soft" data-aos="fade-up">
+          {category.description}
+        </p>
 
         <Reveal className="grid grid-cols-1 gap-4 min-[961px]:grid-cols-3">
-          {category.tiers.map((tier) => (
+          {category.tiers.map((tier, index) => (
             <PricingTierCard
               key={tier.name}
               tier={tier}
               href={category.breakdownHref}
+              index={index}
             />
           ))}
         </Reveal>

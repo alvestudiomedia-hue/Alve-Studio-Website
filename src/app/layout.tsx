@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, IBM_Plex_Mono, Inter, Sora } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { AosInit } from "@/components/layout/AosInit";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${fraunces.variable} ${inter.variable} ${plexMono.variable} ${sora.variable} h-full`}
     >
       <body className="flex min-h-full flex-col">
+        <AosInit />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -3,13 +3,23 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 import type { PricingTier } from "./types";
 
-export function PricingTierCard({ tier, href }: { tier: PricingTier; href: string }) {
+export function PricingTierCard({
+  tier,
+  href,
+  index,
+}: {
+  tier: PricingTier;
+  href: string;
+  index: number;
+}) {
   return (
     <article
       className={cn(
-        "relative flex flex-col rounded-lg border bg-white p-7",
+        "service-card relative flex flex-col rounded-lg border bg-white p-7",
         tier.featured ? "border-service-accent shadow-service-pop" : "border-service-line",
       )}
+      data-aos="fade-up"
+      data-aos-delay={index * 80}
     >
       {tier.featured ? (
         <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-pill bg-service-accent px-3 py-1 font-service text-[0.7rem] font-bold text-white">

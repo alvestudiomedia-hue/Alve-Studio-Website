@@ -14,18 +14,28 @@ const engagementColumnStyles = {
   5: "grid-cols-2 min-[641px]:grid-cols-3 min-[1001px]:grid-cols-5",
 } as const;
 
-function ContentCard({ card, kind }: { card: ServiceCard; kind: ContentSection["kind"] }) {
+function ContentCard({
+  card,
+  kind,
+  index,
+}: {
+  card: ServiceCard;
+  kind: ContentSection["kind"];
+  index: number;
+}) {
   const isQuestion = kind === "questions";
   const isEngagement = kind === "engagement";
 
   return (
     <article
       className={cn(
-        "rounded-md p-[1.3rem]",
+        "service-card rounded-md p-[1.3rem]",
         isQuestion && "bg-service-lavender",
         !isQuestion && "border border-service-line bg-white",
         isEngagement && "p-[1.1rem]",
       )}
+      data-aos="fade-up"
+      data-aos-delay={index * 70}
     >
       <h3
         className={cn(
@@ -79,11 +89,12 @@ export function ServiceContentSection({ section }: { section: ContentSection }) 
               cardColumns,
             )}
           >
-            {section.cards.map((card) => (
+            {section.cards.map((card, index) => (
               <ContentCard
                 key={`${card.value ?? ""}-${card.title}`}
                 card={card}
                 kind={section.kind}
+                index={index}
               />
             ))}
           </Reveal>

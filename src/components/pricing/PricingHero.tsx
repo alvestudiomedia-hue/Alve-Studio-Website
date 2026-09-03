@@ -7,7 +7,10 @@ export function PricingHero() {
   return (
     <Section tone="hero" className="-py-4">
       <Container>
-        <div className="max-w-[720px] py-[clamp(2.5rem,5vw,4rem)]">
+        <div
+          className="max-w-180 py-[clamp(2.5rem,5vw,4rem)]"
+          data-aos="fade-up"
+        >
           <Eyebrow
             variant="line"
             className="font-service text-[0.72rem] font-semibold tracking-[0.14em] text-service-accent-light"
@@ -21,7 +24,12 @@ export function PricingHero() {
             At Alve Studio, we help businesses build, launch, improve, and grow. Our services are available through flexible engagement models depending on what you need — from one-time projects to ongoing monthly partnerships. All prices shown are starting prices; complex projects are quoted based on scope, requirements, and execution needs.
           </p>
         </div>
-        <nav aria-label="Pricing categories" className="flex flex-wrap gap-2 pb-10">
+        <nav
+          aria-label="Pricing categories"
+          className="flex flex-wrap gap-2 pb-10"
+          data-aos="fade-up"
+          data-aos-delay="150"
+        >
           {pricingCategories.map((category) => (
             <a
               key={category.id}
