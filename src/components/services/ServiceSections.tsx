@@ -72,11 +72,13 @@ export function Capabilities({
       <Container>
         <Heading eyebrow={eyebrow} title={title} body={body} />
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2">
+        <div className="mt-14 grid items-start gap-6 md:grid-cols-2">
           {items.map((item, index) => (
             <article
               key={item.title}
-              className="flex flex-col rounded-sm border border-border bg-surface p-8"
+              className="service-card flex flex-col rounded-sm border border-border bg-surface p-8"
+              data-aos="fade-up"
+              data-aos-delay={index * 80}
             >
               <span className="font-sans text-eyebrow text-purple-mid">
                 {String(index + 1).padStart(2, "0")}
@@ -137,8 +139,8 @@ export function Steps({
         <Heading eyebrow={eyebrow} title={title} body={body} onDark />
 
         <ol className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((step) => (
-            <li key={step.title}>
+          {items.map((step, index) => (
+            <li key={step.title} data-aos="fade-up" data-aos-delay={index * 70}>
               <span className="font-sans text-eyebrow uppercase text-purple-pale">
                 {step.label}
               </span>
@@ -173,10 +175,12 @@ export function Features({
         <Heading eyebrow={eyebrow} title={title} body={body} />
 
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <article
               key={item.title}
-              className="rounded-sm border border-border bg-surface p-8"
+              className="service-card rounded-sm border border-border bg-surface p-8"
+              data-aos="fade-up"
+              data-aos-delay={index * 80}
             >
               <h3 className="text-h2 text-purple-ink">{item.title}</h3>
               <p className="mt-3 text-body-sm text-ink-soft text-pretty">
@@ -205,8 +209,8 @@ export function FaqList({
         <Heading eyebrow={eyebrow} title={title} />
 
         <ul className="mt-12 max-w-3xl space-y-3">
-          {items.map((faq) => (
-            <li key={faq.question}>
+          {items.map((faq, index) => (
+            <li key={faq.question} data-aos="fade-up" data-aos-delay={index * 70}>
               <details className="group rounded-sm border border-border bg-surface">
                 <summary className="flex cursor-pointer items-center justify-between gap-4 p-5 text-body text-ink marker:content-['']">
                   {faq.question}
@@ -288,7 +292,10 @@ export function GroupedCapabilities({
         <div className="mt-14 space-y-16">
           {groups.map((group, groupIndex) => (
             <div key={group.title}>
-              <div className="max-w-3xl border-t border-border pt-8">
+              <div
+                className="max-w-3xl border-t border-border pt-8"
+                data-aos="fade-up"
+              >
                 <span className="font-sans text-eyebrow text-purple-mid">
                   {String(groupIndex + 1).padStart(2, "0")}
                 </span>
@@ -300,11 +307,13 @@ export function GroupedCapabilities({
                 </p>
               </div>
 
-              <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {group.items.map((item) => (
+              <div className="mt-8 grid items-start gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {group.items.map((item, itemIndex) => (
                   <article
                     key={item.title}
-                    className="flex flex-col rounded-sm border border-border bg-surface p-7"
+                    className="service-card flex flex-col rounded-sm border border-border bg-surface p-7"
+                    data-aos="fade-up"
+                    data-aos-delay={itemIndex * 80}
                   >
                     <h4 className="text-h2 text-purple-ink">{item.title}</h4>
                     <p className="mt-3 flex-1 text-body-sm text-ink-soft text-pretty">

@@ -42,13 +42,15 @@ export function PricingInfoSection({
           />
         </Reveal>
         <Reveal className="grid grid-cols-1 gap-4 min-[561px]:grid-cols-2 min-[901px]:grid-cols-3">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <article
               key={item.title}
               className={cn(
-                "rounded-md p-5",
+                "service-card rounded-md p-5",
                 bordered ? "border border-service-line bg-white" : "bg-service-lavender",
               )}
+              data-aos="fade-up"
+              data-aos-delay={index * 70}
             >
               <h3 className={cn("font-service font-bold", bordered ? "text-[0.98rem]" : "text-[0.94rem]")}>
                 {item.title}

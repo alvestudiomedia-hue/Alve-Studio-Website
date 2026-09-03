@@ -16,8 +16,13 @@ export function ServiceProcess({ process }: ServiceProcessProps) {
           <MarketingSectionHeading {...process} onDark />
         </Reveal>
         <Reveal className="grid grid-cols-1 gap-4 min-[561px]:grid-cols-2 min-[901px]:grid-cols-4">
-          {process.steps.map((step) => (
-            <article key={step.label} className="border-t-2 border-white/14 py-5.5">
+          {process.steps.map((step, index) => (
+            <article
+              key={step.label}
+              className="border-t-2 border-white/14 py-5.5"
+              data-aos="fade-up"
+              data-aos-delay={index * 70}
+            >
               <span className="font-service text-[0.85rem] font-bold text-service-accent">
                 {step.label}
               </span>

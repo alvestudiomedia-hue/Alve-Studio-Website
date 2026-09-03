@@ -20,10 +20,12 @@ function OfferAccordion({ offer }: { offer: ServiceOffer }) {
       </div>
       <p className="mb-5 max-w-2xl text-service-ink-soft">{offer.description}</p>
 
-      {offer.details.map((detail) => (
+      {offer.details.map((detail, index) => (
         <details
           key={detail.title}
           className="group mt-3 overflow-hidden rounded-md border border-service-line bg-white first:mt-0"
+          data-aos="fade-up"
+          data-aos-delay={index * 70}
         >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5.5 py-[1.15rem] [&::-webkit-details-marker]:hidden">
             <span>

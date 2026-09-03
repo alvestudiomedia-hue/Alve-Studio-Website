@@ -354,3 +354,18 @@
     transparent 100%
   );
 }
+
+@layer components {
+  .service-card {
+    transition:
+      box-shadow 500ms ease,
+      border-color 500ms ease,
+      background-color 500ms ease;
+  }
+
+  .service-card:hover {
+    border-color: var(--purple-pale);
+    background-color: color-mix(in oklab, var(--surface) 94%, var(--purple-tint));
+    box-shadow: var(--elevation-lift);
+  }
+}

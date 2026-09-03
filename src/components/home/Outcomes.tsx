@@ -17,9 +17,10 @@ export function Outcomes() {
             alt="Alve Studio product team collaborating"
             ratio="video"
             className="lg:order-first"
+            data-aos="fade-right"
           />
 
-          <div>
+          <div data-aos="fade-left">
             <h2 className="font-sans text-h1 text-purple-ink text-balance">
               We Don&apos;t Just Build Products. We Build Outcomes.
             </h2>

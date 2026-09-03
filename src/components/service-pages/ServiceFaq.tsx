@@ -23,8 +23,13 @@ export function ServiceFaq({ faq, faqTone }: ServiceFaqProps) {
           <MarketingSectionHeading eyebrow="FAQ" title="Frequently asked questions" />
         </Reveal>
         <Reveal className="max-w-3xl">
-          {faq.map((item) => (
-            <details key={item.question} className="group border-b border-service-line">
+          {faq.map((item, index) => (
+            <details
+              key={item.question}
+              className="group border-b border-service-line"
+              data-aos="fade-up"
+              data-aos-delay={index * 70}
+            >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-service text-base font-semibold [&::-webkit-details-marker]:hidden">
                 {item.question}
                 <Plus className="size-6 shrink-0 text-service-accent transition-transform duration-200 group-open:rotate-45" />

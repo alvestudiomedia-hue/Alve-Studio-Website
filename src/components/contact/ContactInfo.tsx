@@ -4,8 +4,8 @@ const infoSections = [
   {
     title: 'Direct Lines',
     items: [
-      { icon: Mail, label: 'EMAIL US', value: 'hello@Alvestudio.com' },
-      { icon: Phone, label: 'CALL US', value: '+1 (555) 0123–4567' },
+      { icon: Mail, label: 'EMAIL US', value: 'hello@alvestudio.com' },
+      { icon: Phone, label: 'CALL US', value: '+234 915 240 2995' },
     ],
   },
   {
@@ -14,7 +14,7 @@ const infoSections = [
       {
         icon: MapPin,
         label: 'HEADQUARTERS',
-        value: '742 Innovation Drive, Suite 400\nTech District, Austin, TX 78701',
+        value: 'Allen Avenue, Ikeja Lagos State Nigeria',
       },
       {
         icon: Clock,
@@ -51,7 +51,7 @@ export default function ContactInfo() {
         </div>
       ))}
       <div className="bg-[#EADEF4] rounded-radius-card rounded-sm border border-gray-200 p-6">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.940644922212!2d3.9703220760230935!3d7.360550612868472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1039ed45137ea7f7%3A0xcc1375193f56e3ad!2sIbadan%20Airport!5e0!3m2!1sen!2sng!4v1786058753674!5m2!1sen!2sng" width="310" height="250" style={{border:0}} allowFullScreen loading="lazy" referrerPolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.3629747069995!2d3.3494461758777203!3d6.601734522247456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b9230fc4fc853%3A0xd8babb191dac2f6b!2sAllen%20Ave%2C%20Allen%2C%20Ikeja%20101233%2C%20Lagos!5e0!3m2!1sen!2sng!4v1788381107759!5m2!1sen!2sng" width="310" height="250" style={{border:0}}  allowFullScreen loading="lazy" referrerPolicy="strict-origin-when-cross-origin"></iframe>
       </div>
     </div>
   );
