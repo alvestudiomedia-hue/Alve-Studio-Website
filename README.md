@@ -16,6 +16,19 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Contact email configuration
+
+Copy `.env.example` to `.env.local` and configure these server-only values:
+
+- `RESEND_API_KEY`: a Resend API key with sending access.
+- `ADMIN_EMAIL`: the inbox that receives contact-form submissions.
+- `EMAIL_FROM`: a sender on a domain already verified in Resend, for example
+  `Alve Studio <hello@example.com>`.
+
+Do not prefix any of these variables with `NEXT_PUBLIC_`. Restart the development
+server after changing environment variables, and configure the same values in your
+production hosting environment.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

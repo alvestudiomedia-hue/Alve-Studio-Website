@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ArrowRight, Calendar as CalendarIcon, X, Plus, CheckCircle2 } from 'lucide-react';
 
+import { submitContactForm } from '@/lib/contact/submit-contact';
+
 type FormData = {
   fullName: string;
   company: string;
@@ -19,6 +21,7 @@ export default function ContactForm() {
   const [preferredDates, setPreferredDates] = useState<string[]>([]);
   const [dateInput, setDateInput] = useState('');
   const [dateError, setDateError] = useState<string | null>(null);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const {
@@ -63,16 +66,33 @@ export default function ContactForm() {
   };
 
   const onSubmit = async (data: FormData) => {
+    setSubmissionError(null);
+    if (preferredDates.length === 0) {
+      setDateError('Please select at least 1 preferred date.');
+      return;
+    }
+
     const payload = {
       ...data,
       preferredDates,
     };
-    console.log('Form submitted:', payload);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    reset();
-    setPreferredDates([]);
-    setDateInput('');
-    setShowSuccessModal(true);
+
+    try {
+      await submitContactForm(payload);
+
+      reset();
+      setPreferredDates([]);
+      setDateInput('');
+      setDateError(null);
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.error('Contact form submission failed:', error);
+      setSubmissionError(
+        error instanceof Error
+          ? error.message
+          : 'Unable to send your message. Please try again.',
+      );
+    }
   };
 
   const inputClasses = (hasError: boolean) => `
@@ -318,6 +338,16 @@ export default function ContactForm() {
             </span>
           </button>
         </div>
+
+        {submissionError && (
+          <p
+            role="alert"
+            aria-live="polite"
+            className="md:col-span-2 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+          >
+            {submissionError}
+          </p>
+        )}
       </form>
 
       {/* Submission Success Modal Alert */}
