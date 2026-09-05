@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:contact": "tsc src/lib/contact/contact-email.ts src/lib/contact/submit-contact.ts src/lib/contact/contact-email.test.ts --outDir /tmp/alve-contact-tests --module commonjs --target ES2020 --lib ES2020,DOM --esModuleInterop --strict --skipLibCheck && node /tmp/alve-contact-tests/contact-email.test.js"
   },
   "dependencies": {
     "aos": "^2.3.4",
@@ -16,6 +17,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-hook-form": "^7.85.0",
+    "resend": "^6.26.0",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {

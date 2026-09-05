@@ -110,8 +110,7 @@ function SolutionCard({
   return (
     <article
       id={solution.id}
-      // tone="hero"
-      className="grid scroll-mt-30 md:min-h-120 md:grid-cols-2 lg:min-h-180"
+      className="gradient-hero grid scroll-mt-30 overflow-hidden rounded-md m-3 md:m-0 border border-dark-border shadow-lift md:min-h-120 md:grid-cols-2 md:rounded-none md:border-0 md:shadow-none lg:min-h-180"
     >
       <div
         className={cn(
@@ -172,7 +171,7 @@ export function Solutions() {
         </h2>
       </Container>
 
-      <div className="gradient-hero mt-14">
+      <div className="mt-14 space-y-8 md:space-y-0">
         {solutions.map((solution, index) => (
           <SolutionCard
             key={solution.id}
