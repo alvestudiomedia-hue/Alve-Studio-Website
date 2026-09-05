@@ -1,10 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ArrowRight, Calendar as CalendarIcon, X, Plus, CheckCircle2 } from 'lucide-react';
 
 import { submitContactForm } from '@/lib/contact/submit-contact';
+import {
+  DEFAULT_BUDGET_RANGES,
+  SERVICE_BUDGET_RANGES,
+} from '@/lib/contact/budget-options';
 
 type FormData = {
   fullName: string;
@@ -16,72 +20,6 @@ type FormData = {
   projectBudget: string;
   privacyPolicy: boolean;
 };
-
-const SERVICE_BUDGET_RANGES: Record<string, { value: string; label: string }[]> = {
-  'growth-marketing': [
-    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
-    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
-    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
-    { value: '1.5m-2m', label: '₦1,500,000 – ₦2,000,000' },
-    { value: '2m+', label: '₦2,000,000+' },
-    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
-    { value: 'need-guidance', label: 'Not sure — I need guidance' },
-  ],
-  'web-development': [
-    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
-    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
-    { value: '1.5m-2m', label: '₦1,500,000 – ₦2,000,000' },
-    { value: '2m-3m', label: '₦2,000,000 – ₦3,000,000' },
-    { value: '3m+', label: '₦3,000,000+' },
-    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
-    { value: 'need-guidance', label: 'Not sure — I need guidance' },
-  ],
-  'qa-testing': [
-    { value: '300k-500k', label: '₦300,000 – ₦500,000' },
-    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
-    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
-    { value: '1m+', label: '₦1,000,000+' },
-    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
-    { value: 'need-guidance', label: 'Not sure — I need guidance' },
-  ],
-  'project-delivery': [
-    { value: '400k-500k', label: '₦400,000 – ₦500,000' },
-    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
-    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
-    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
-    { value: '1.5m+', label: '₦1,500,000+' },
-    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
-    { value: 'need-guidance', label: 'Not sure — I need guidance' },
-  ],
-  'creative-services': [
-    { value: '350k-500k', label: '₦350,000 – ₦500,000' },
-    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
-    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
-    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
-    { value: '1.5m+', label: '₦1,500,000+' },
-    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
-    { value: 'need-guidance', label: 'Not sure — I need guidance' },
-  ],
-  'field-marketing': [
-    { value: '350k-500k', label: '₦350,000 – ₦500,000' },
-    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
-    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
-    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
-    { value: '1.5m+', label: '₦1,500,000+' },
-    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
-    { value: 'need-guidance', label: 'Not sure — I need guidance' },
-  ],
-};
-
-const DEFAULT_BUDGET_RANGES = [
-  { value: '300k-500k', label: '₦300,000 – ₦500,000' },
-  { value: '500k-1m', label: '₦500,000 – ₦1,000,000' },
-  { value: '1m-2m', label: '₦1,000,000 – ₦2,000,000' },
-  { value: '2m-3m', label: '₦2,000,000 – ₦3,000,000' },
-  { value: '3m+', label: '₦3,000,000+' },
-  { value: 'custom-enterprise', label: 'Custom / Enterprise' },
-  { value: 'need-guidance', label: 'Not sure — I need guidance' },
-];
 
 export default function ContactForm() {
   const [preferredDates, setPreferredDates] = useState<string[]>([]);
@@ -112,17 +50,20 @@ export default function ContactForm() {
   });
 
   const selectedService = watch('requiredService');
+  const selectedBudgetOptions = selectedService
+    ? SERVICE_BUDGET_RANGES[selectedService] ?? DEFAULT_BUDGET_RANGES
+    : DEFAULT_BUDGET_RANGES;
 
-  // Reset budget if currently selected budget is not valid for newly selected service
   useEffect(() => {
-    if (selectedService && SERVICE_BUDGET_RANGES[selectedService]) {
-      const validValues = SERVICE_BUDGET_RANGES[selectedService].map((o) => o.value);
-      const currentBudget = watch('projectBudget');
-      if (currentBudget && !validValues.includes(currentBudget)) {
-        setValue('projectBudget', '');
-      }
+    const currentBudget = watch('projectBudget');
+    if (
+      currentBudget &&
+      selectedService &&
+      !selectedBudgetOptions.some((option) => option.value === currentBudget)
+    ) {
+      setValue('projectBudget', '');
     }
-  }, [selectedService, setValue, watch]);
+  }, [selectedBudgetOptions, selectedService, setValue, watch]);
 
   const handleAddDate = () => {
     setDateError(null);
@@ -308,14 +249,11 @@ export default function ContactForm() {
             className={inputClasses(!!errors.projectBudget)}
           >
             <option value="">
-              {selectedService ? 'Select budget range' : 'Select range (or choose service first)'}
+              {selectedService ? 'Select budget range' : 'Select a service first'}
             </option>
-            {(selectedService && SERVICE_BUDGET_RANGES[selectedService]
-              ? SERVICE_BUDGET_RANGES[selectedService]
-              : DEFAULT_BUDGET_RANGES
-            ).map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
+            {selectedBudgetOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
               </option>
             ))}
           </select>

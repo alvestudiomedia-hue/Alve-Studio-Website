@@ -4,7 +4,7 @@ const infoSections = [
   {
     title: 'Direct Lines',
     items: [
-      { icon: Mail, label: 'EMAIL US', value: 'hello@alvestudio.com' },
+      { icon: Mail, label: 'EMAIL US', value: 'hello@alvestudioagency.com' },
       { icon: Phone, label: 'CALL US', value: '+234 915 240 2995' },
     ],
   },
