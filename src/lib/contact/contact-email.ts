@@ -13,7 +13,7 @@ export type ContactSubmission = {
 export type ContactEmailRequest = {
   from: string;
   to: string[];
-  replyTo: string;
+  replyTo?: string;
   subject: string;
   html: string;
   text: string;
@@ -35,10 +35,11 @@ export type ContactEmailSender = (
 type ContactEmailConfig = {
   adminEmail: string;
   emailFrom: string;
+  clientPortalUrl: string;
 };
 
 type SubmissionResult =
-  | { success: true; emailId: string }
+  | { success: true; emailId: string; ticketId: string }
   | {
       success: false;
       status: 400 | 500;
@@ -244,13 +245,17 @@ function detailRow(label: string, value: string): string {
   </tr>`;
 }
 
-export function renderContactEmail(submission: ContactSubmission): { html: string; text: string } {
+export function renderContactEmail(
+  submission: ContactSubmission,
+  ticketId: string,
+): { html: string; text: string } {
   const service = `${SERVICE_LABELS[submission.requiredService]} (${submission.requiredService})`;
   const budget = `${BUDGET_LABELS[submission.projectBudget]} (${submission.projectBudget})`;
   const dates = submission.preferredDates.length
     ? submission.preferredDates.join(', ')
     : 'Not provided';
   const details = submission.projectDetails || 'Not provided';
+  const safeTicketId = escapeHtml(ticketId);
 
   const html = `<!doctype html>
 <html lang="en">
@@ -260,10 +265,12 @@ export function renderContactEmail(submission: ContactSubmission): { html: strin
         <div style="background:#3f2157;padding:24px 28px;color:#ffffff">
           <div style="font-size:12px;letter-spacing:1.4px;text-transform:uppercase;opacity:.8">Alve Studio website</div>
           <h1 style="font-size:24px;line-height:1.3;margin:8px 0 0">New Contact Form Submission</h1>
+          <div style="margin-top:12px;font-size:16px;font-weight:600">Ticket #${safeTicketId}</div>
         </div>
         <div style="padding:28px">
           <h2 style="font-size:17px;margin:0 0 12px">Customer information</h2>
           <table role="presentation" style="width:100%;border-collapse:collapse">
+            ${detailRow('Ticket number', ticketId)}
             ${detailRow('Name', submission.fullName)}
             ${detailRow('Email', submission.workEmail)}
             ${detailRow('Phone', submission.phoneNumber)}
@@ -287,6 +294,7 @@ export function renderContactEmail(submission: ContactSubmission): { html: strin
 </html>`;
 
   const text = `New Contact Form Submission
+Ticket number: #${ticketId}
 
 Customer information
 Name: ${submission.fullName}
@@ -303,6 +311,51 @@ Project details
 ${details}`;
 
   return { html, text };
+}
+
+export function renderClientConfirmationEmail(
+  submission: ContactSubmission,
+  ticketId: string,
+  clientPortalUrl: string,
+): { html: string; text: string } {
+  const safeName = escapeHtml(submission.fullName);
+  const safeTicketId = escapeHtml(ticketId);
+  const safePortalUrl = escapeHtml(clientPortalUrl);
+
+  return {
+    html: `<!doctype html>
+<html lang="en">
+  <body style="margin:0;background:#f6f2fa;font-family:Arial,sans-serif;color:#21182b">
+    <div style="max-width:640px;margin:0 auto;padding:32px 16px">
+      <div style="background:#ffffff;border:1px solid #e8dff0;border-radius:12px;overflow:hidden">
+        <div style="background:#3f2157;padding:24px 28px;color:#ffffff">
+          <div style="font-size:12px;letter-spacing:1.4px;text-transform:uppercase;opacity:.8">Alve Studio</div>
+          <h1 style="font-size:24px;line-height:1.3;margin:8px 0 0">We received your request</h1>
+        </div>
+        <div style="padding:28px;font-size:15px;line-height:1.6">
+          <p>Hi ${safeName},</p>
+          <p>Thanks for reaching out to Alve Studio. We have received your submission and logged it under ticket number <strong>#${safeTicketId}</strong>.</p>
+          <p><strong>What to expect:</strong><br />Our team is reviewing the details of your request.<br />A team member will update you within 4 to 12 hours.</p>
+          <p><strong>Please Note:</strong> This is an automated notification from an unmonitored mailbox. Please do not reply directly to this email. You can check ticket updates anytime via your <a href="${safePortalUrl}" style="color:#6f3f8f">Client Portal</a>.</p>
+          <p>Best regards,<br />Alve Studio Team</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>`,
+    text: `Hi ${submission.fullName},
+
+Thanks for reaching out to Alve Studio. We have received your submission and logged it under ticket number #${ticketId}.
+
+What to expect:
+Our team is reviewing the details of your request.
+A team member will update you within 4 to 12 hours.
+
+Please Note: This is an automated notification from an unmonitored mailbox. Please do not reply directly to this email. You can check ticket updates anytime via your Client Portal: ${clientPortalUrl}
+
+Best regards,
+Alve Studio Team`,
+  };
 }
 
 function normaliseProviderError(error: unknown): ProviderError {
@@ -325,6 +378,7 @@ export async function processContactSubmission(
   input: unknown,
   config: ContactEmailConfig,
   sendEmail: ContactEmailSender,
+  ticketId: string,
 ): Promise<SubmissionResult> {
   const validation = validateContactSubmission(input);
   if (!validation.success) {
@@ -337,14 +391,14 @@ export async function processContactSubmission(
   }
 
   const submission = validation.data;
-  const template = renderContactEmail(submission);
+  const template = renderContactEmail(submission, ticketId);
 
   try {
     const { data, error } = await sendEmail({
       from: config.emailFrom,
       to: [config.adminEmail],
       replyTo: submission.workEmail,
-      subject: 'New Contact Form Submission',
+      subject: `New Contact Form Submission #${ticketId}`,
       ...template,
     });
 
@@ -369,7 +423,30 @@ export async function processContactSubmission(
       };
     }
 
-    return { success: true, emailId: data.id };
+    const confirmation = renderClientConfirmationEmail(
+      submission,
+      ticketId,
+      config.clientPortalUrl,
+    );
+    const confirmationResult = await sendEmail({
+      from: config.emailFrom,
+      to: [submission.workEmail],
+      subject: `Alve Studio ticket #${ticketId} received`,
+      ...confirmation,
+    });
+
+    if (confirmationResult.error || !confirmationResult.data?.id) {
+      return {
+        success: false,
+        status: 500,
+        message: 'Unable to send confirmation email',
+        providerError: confirmationResult.error
+          ? normaliseProviderError(confirmationResult.error)
+          : { message: 'Confirmation email provider did not return an email ID.', name: 'missing_confirmation_email_id' },
+      };
+    }
+
+    return { success: true, emailId: data.id, ticketId };
   } catch (error) {
     return {
       success: false,

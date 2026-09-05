@@ -22,6 +22,7 @@ export default function ContactForm() {
   const [dateInput, setDateInput] = useState('');
   const [dateError, setDateError] = useState<string | null>(null);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
+  const [ticketId, setTicketId] = useState<string | null>(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const {
@@ -78,12 +79,13 @@ export default function ContactForm() {
     };
 
     try {
-      await submitContactForm(payload);
+      const result = await submitContactForm(payload);
 
       reset();
       setPreferredDates([]);
       setDateInput('');
       setDateError(null);
+      setTicketId(result.ticketId);
       setShowSuccessModal(true);
     } catch (error) {
       console.error('Contact form submission failed:', error);
@@ -369,6 +371,11 @@ export default function ContactForm() {
             <p className="text-sm text-ink-muted mb-6">
               Thank you for reaching out. We have received your request and will be in touch shortly to confirm your preferred dates and details.
             </p>
+            {ticketId && (
+              <p className="mb-6 rounded bg-purple-tint px-4 py-3 text-sm text-ink">
+                Your ticket number: <strong>#{ticketId}</strong>
+              </p>
+            )}
 
             <button
               onClick={() => setShowSuccessModal(false)}

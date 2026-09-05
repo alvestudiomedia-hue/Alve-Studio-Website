@@ -15,6 +15,7 @@ function getEmailConfiguration() {
   const resendApiKey = process.env.RESEND_API_KEY;
   const adminEmail = process.env.ADMIN_EMAIL;
   const emailFrom = process.env.EMAIL_FROM;
+  const clientPortalUrl = process.env.CLIENT_PORTAL_URL || 'https://alvestudioagency.com';
 
   if (!resendApiKey || !adminEmail || !emailFrom) {
     throw new Error('Required contact email environment variables are missing.');
@@ -24,7 +25,13 @@ function getEmailConfiguration() {
     throw new Error('Contact email environment variables are malformed.');
   }
 
-  return { resendApiKey, adminEmail, emailFrom };
+  return { resendApiKey, adminEmail, emailFrom, clientPortalUrl };
+}
+
+function createTicketId(): string {
+  const date = new Date().toISOString().slice(0, 10).replaceAll('-', '');
+  const suffix = crypto.randomUUID().slice(0, 8).toUpperCase();
+  return `ALV-${date}-${suffix}`;
 }
 
 export async function POST(request: Request) {
@@ -59,7 +66,8 @@ export async function POST(request: Request) {
     return resend.emails.send(email);
   };
 
-  const result = await processContactSubmission(body, config, sendEmail);
+  const ticketId = createTicketId();
+  const result = await processContactSubmission(body, config, sendEmail, ticketId);
 
   if (!result.success) {
     if (result.providerError) {
@@ -75,10 +83,14 @@ export async function POST(request: Request) {
     );
   }
 
-  console.log('Resend email sent successfully:', result.emailId);
+  console.log('Contact emails sent successfully:', {
+    emailId: result.emailId,
+    ticketId: result.ticketId,
+  });
   return NextResponse.json({
     success: true,
     message: 'Email sent successfully',
     emailId: result.emailId,
+    ticketId: result.ticketId,
   });
 }
