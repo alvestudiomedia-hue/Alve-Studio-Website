@@ -2,6 +2,7 @@ type SuccessfulContactResponse = {
   success: true;
   message: string;
   emailId: string;
+  ticketId: string;
 };
 
 export async function submitContactForm(
@@ -16,14 +17,14 @@ export async function submitContactForm(
     body: JSON.stringify(payload),
   });
 
-  let result: { success?: boolean; message?: string; emailId?: string } = {};
+  let result: { success?: boolean; message?: string; emailId?: string; ticketId?: string } = {};
   try {
     result = await response.json();
   } catch {
     // A non-JSON response is handled as a failed submission below.
   }
 
-  if (!response.ok || result.success !== true || !result.emailId) {
+  if (!response.ok || result.success !== true || !result.emailId || !result.ticketId) {
     throw new Error(result.message || 'Failed to send message');
   }
 
@@ -31,5 +32,6 @@ export async function submitContactForm(
     success: true,
     message: result.message || 'Email sent successfully',
     emailId: result.emailId,
+    ticketId: result.ticketId,
   };
 }
