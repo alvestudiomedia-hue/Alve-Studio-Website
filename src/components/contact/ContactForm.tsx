@@ -21,6 +21,72 @@ type FormData = {
   privacyPolicy: boolean;
 };
 
+const SERVICE_BUDGET_RANGES: Record<string, { value: string; label: string }[]> = {
+  'growth-marketing': [
+    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
+    { value: '1.5m-2m', label: '₦1,500,000 – ₦2,000,000' },
+    { value: '2m+', label: '₦2,000,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+  'web-development': [
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
+    { value: '1.5m-2m', label: '₦1,500,000 – ₦2,000,000' },
+    { value: '2m-3m', label: '₦2,000,000 – ₦3,000,000' },
+    { value: '3m+', label: '₦3,000,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+  'qa-testing': [
+    { value: '300k-500k', label: '₦300,000 – ₦500,000' },
+    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m+', label: '₦1,000,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+  'project-delivery': [
+    { value: '400k-500k', label: '₦400,000 – ₦500,000' },
+    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
+    { value: '1.5m+', label: '₦1,500,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+  'creative-services': [
+    { value: '350k-500k', label: '₦350,000 – ₦500,000' },
+    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
+    { value: '1.5m+', label: '₦1,500,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+  'field-marketing': [
+    { value: '350k-500k', label: '₦350,000 – ₦500,000' },
+    { value: '500k-750k', label: '₦500,000 – ₦750,000' },
+    { value: '750k-1m', label: '₦750,000 – ₦1,000,000' },
+    { value: '1m-1.5m', label: '₦1,000,000 – ₦1,500,000' },
+    { value: '1.5m+', label: '₦1,500,000+' },
+    { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+    { value: 'need-guidance', label: 'Not sure — I need guidance' },
+  ],
+};
+
+const DEFAULT_BUDGET_RANGES = [
+  { value: '300k-500k', label: '₦300,000 – ₦500,000' },
+  { value: '500k-1m', label: '₦500,000 – ₦1,000,000' },
+  { value: '1m-2m', label: '₦1,000,000 – ₦2,000,000' },
+  { value: '2m-3m', label: '₦2,000,000 – ₦3,000,000' },
+  { value: '3m+', label: '₦3,000,000+' },
+  { value: 'custom-enterprise', label: 'Custom / Enterprise' },
+  { value: 'need-guidance', label: 'Not sure — I need guidance' },
+];
+
 export default function ContactForm() {
   const [preferredDates, setPreferredDates] = useState<string[]>([]);
   const [dateInput, setDateInput] = useState('');
@@ -233,9 +299,16 @@ export default function ContactForm() {
 
         {/* Project Budget */}
         <div>
-          <label htmlFor="projectBudget" className="block text-sm font-medium text-ink mb-1">
-            Project Budget
-          </label>
+          <div className="flex items-center justify-between mb-1">
+            <label htmlFor="projectBudget" className="block text-sm font-medium text-ink">
+              Project Budget
+            </label>
+            {selectedService && (
+              <span className="text-[11px] font-medium text-purple-mid animate-fadeIn">
+                Tailored to service
+              </span>
+            )}
+          </div>
           <select
             id="projectBudget"
             {...register('projectBudget', { required: 'Please select a budget range' })}
