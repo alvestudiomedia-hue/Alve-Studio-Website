@@ -1,10 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ArrowRight, Calendar as CalendarIcon, X, Plus, CheckCircle2 } from 'lucide-react';
 
 import { submitContactForm } from '@/lib/contact/submit-contact';
+import {
+  DEFAULT_BUDGET_RANGES,
+  SERVICE_BUDGET_RANGES,
+} from '@/lib/contact/budget-options';
 
 type FormData = {
   fullName: string;
@@ -28,6 +32,8 @@ export default function ContactForm() {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<FormData>({
@@ -42,6 +48,22 @@ export default function ContactForm() {
       privacyPolicy: false,
     },
   });
+
+  const selectedService = watch('requiredService');
+  const selectedBudgetOptions = selectedService
+    ? SERVICE_BUDGET_RANGES[selectedService] ?? DEFAULT_BUDGET_RANGES
+    : DEFAULT_BUDGET_RANGES;
+
+  useEffect(() => {
+    const currentBudget = watch('projectBudget');
+    if (
+      currentBudget &&
+      selectedService &&
+      !selectedBudgetOptions.some((option) => option.value === currentBudget)
+    ) {
+      setValue('projectBudget', '');
+    }
+  }, [selectedBudgetOptions, selectedService, setValue, watch]);
 
   const handleAddDate = () => {
     setDateError(null);
@@ -219,11 +241,14 @@ export default function ContactForm() {
             {...register('projectBudget', { required: 'Please select a budget range' })}
             className={inputClasses(!!errors.projectBudget)}
           >
-            <option value="">Select range</option>
-            <option value="10k-25k">$10,000 – $25,000</option>
-            <option value="25k-50k">$25,000 – $50,000</option>
-            <option value="50k-100k">$50,000 – $100,000</option>
-            <option value="100k+">$100,000+</option>
+            <option value="">
+              {selectedService ? 'Select budget range' : 'Select a service first'}
+            </option>
+            {selectedBudgetOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
           </select>
           {errors.projectBudget && (
             <p className="mt-1 text-sm text-red-500">{errors.projectBudget.message}</p>

@@ -1,3 +1,8 @@
+import {
+  getBudgetLabel,
+  getBudgetOptions,
+} from './budget-options';
+
 export type ContactSubmission = {
   fullName: string;
   company: string;
@@ -55,13 +60,6 @@ const SERVICE_LABELS: Record<string, string> = {
   'growth-marketing': 'Growth & Marketing',
   'qa-testing': 'QA & Testing',
   'creative-services': 'Creative Services',
-};
-
-const BUDGET_LABELS: Record<string, string> = {
-  '10k-25k': '$10,000 – $25,000',
-  '25k-50k': '$25,000 – $50,000',
-  '50k-100k': '$50,000 – $100,000',
-  '100k+': '$100,000+',
 };
 
 const ALLOWED_FIELDS = new Set([
@@ -192,7 +190,12 @@ export function validateContactSubmission(
     fieldErrors.requiredService = 'Select a valid service.';
   }
 
-  if (projectBudget && !BUDGET_LABELS[projectBudget]) {
+  if (
+    projectBudget &&
+    requiredService &&
+    SERVICE_LABELS[requiredService] &&
+    !getBudgetOptions(requiredService).some((option) => option.value === projectBudget)
+  ) {
     fieldErrors.projectBudget = 'Select a valid budget range.';
   }
 
@@ -250,7 +253,7 @@ export function renderContactEmail(
   ticketId: string,
 ): { html: string; text: string } {
   const service = `${SERVICE_LABELS[submission.requiredService]} (${submission.requiredService})`;
-  const budget = `${BUDGET_LABELS[submission.projectBudget]} (${submission.projectBudget})`;
+  const budget = `${getBudgetLabel(submission.projectBudget) ?? submission.projectBudget} (${submission.projectBudget})`;
   const dates = submission.preferredDates.length
     ? submission.preferredDates.join(', ')
     : 'Not provided';
@@ -351,7 +354,7 @@ What to expect:
 Our team is reviewing the details of your request.
 A team member will update you within 4 to 12 hours.
 
-Please Note: This is an automated notification from an unmonitored mailbox. Please do not reply directly to this email. You can check ticket updates anytime via your Client Portal: ${clientPortalUrl}
+Please Note: This is an automated notification from an unmonitored mailbox. Please do not reply directly to this email. 
 
 Best regards,
 Alve Studio Team`,
