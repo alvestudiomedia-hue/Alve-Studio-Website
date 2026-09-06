@@ -50,7 +50,7 @@ export default function ContactInfo() {
           </div>
         </div>
       ))}
-      <div className="bg-[#EADEF4] rounded-radius-card rounded-sm border border-gray-200 p-6">
+      <div className="bg-[#EADEF4] rounded-radius-card rounded-sm border border-gray-400 p-6">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.3629747069995!2d3.3494461758777203!3d6.601734522247456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b9230fc4fc853%3A0xd8babb191dac2f6b!2sAllen%20Ave%2C%20Allen%2C%20Ikeja%20101233%2C%20Lagos!5e0!3m2!1sen!2sng!4v1788381107759!5m2!1sen!2sng" width="310" height="250" style={{border:0}}  allowFullScreen loading="lazy" referrerPolicy="strict-origin-when-cross-origin"></iframe>
       </div>
     </div>
