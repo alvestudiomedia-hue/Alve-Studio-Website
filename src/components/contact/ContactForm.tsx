@@ -193,7 +193,7 @@ export default function ContactForm() {
           <input
             id="phoneNumber"
             type="tel"
-            placeholder="+1 (555) 000-0000"
+            placeholder="+234 800 000 0000"
             {...register('phoneNumber', {
               required: 'Phone number is required',
               minLength: {

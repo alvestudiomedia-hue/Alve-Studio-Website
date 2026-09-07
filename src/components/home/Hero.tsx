@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
@@ -7,7 +8,28 @@ import { ArrowRight } from "@/components/ui/icons";
 export function Hero() {
   return (
     <Section tone="hero" className="relative overflow-hidden lg:py-36">
-      <Container className="relative">
+      {/* Background stock image with fill, cover, and high-impact bold visibility */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <Image
+          src="/images/hero-team.jpg"
+          alt="Alve Studio product team collaborating"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-85 contrast-105 saturate-110"
+        />
+        {/* Directional gradient: ensures pristine text contrast on the left while keeping the photo bold and striking */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-purple-ink via-purple-ink/70 to-purple-ink/10"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-dark-background/70 via-transparent to-transparent"
+        />
+      </div>
+
+      <Container className="relative z-10">
         <div className="max-w-5xl">
           <Eyebrow className="text-dark-ink">
             Full-cycle product studio
