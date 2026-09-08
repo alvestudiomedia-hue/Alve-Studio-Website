@@ -338,9 +338,10 @@ export function renderClientConfirmationEmail(
         <div style="padding:28px;font-size:15px;line-height:1.6">
           <p>Hi ${safeName},</p>
           <p>Thanks for reaching out to Alve Studio! We have received your submission and logged it under ticket number <strong>#${safeTicketId}</strong>.</p>
-          <p><strong>What to expect:</strong><br />Our team is reviewing the details of your request. <br />A team member will update you within 4 to 12 hours.</p>
-          <a href="${safePortalUrl}" style="color:#6f3f8f">Client Portal</a>
-          <p>If you need to add details, context, or attachments to this request in the meantime, simply reply directly to this email or visit our website at <a href="https://alvestudioagency.com/" style="color:#6f3f8f">https://alvestudioagency.com/</a>.</p>
+          <p style="margin-bottom:8px"><strong>What to expect:</strong></p>
+          <p style="margin:0 0 8px">Our team is reviewing the details of your request.</p>
+          <p style="margin:0 0 16px">A team member will update you within 4 to 12 hours.</p>
+          <p>If you need to add details, context, or attachments to this request in the meantime, simply reply directly to this email or visit our website at <a href="${safePortalUrl}" style="color:#6f3f8f">https://alvestudioagency.com/</a>.</p>
           <p>Best regards,<br />Alve Studio Team</p>
         </div>
       </div>
@@ -349,13 +350,13 @@ export function renderClientConfirmationEmail(
 </html>`,
     text: `Hi ${submission.fullName},
 
-Thanks for reaching out to Alve Studio. We have received your submission and logged it under ticket number #${ticketId}.
+Thanks for reaching out to Alve Studio! We have received your submission and logged it under ticket number #${ticketId}.
 
 What to expect:
 Our team is reviewing the details of your request.
 A team member will update you within 4 to 12 hours.
 
-Please Note: This is an automated notification from an unmonitored mailbox. Please do not reply directly to this email. 
+If you need to add details, context, or attachments to this request in the meantime, simply reply directly to this email or visit our website at https://alvestudioagency.com/
 
 Best regards,
 Alve Studio Team`,
