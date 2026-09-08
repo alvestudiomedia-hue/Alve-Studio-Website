@@ -337,9 +337,10 @@ export function renderClientConfirmationEmail(
         </div>
         <div style="padding:28px;font-size:15px;line-height:1.6">
           <p>Hi ${safeName},</p>
-          <p>Thanks for reaching out to Alve Studio. We have received your submission and logged it under ticket number <strong>#${safeTicketId}</strong>.</p>
-          <p><strong>What to expect:</strong><br />Our team is reviewing the details of your request.<br />A team member will update you within 4 to 12 hours.</p>
-          <p><strong>Please Note:</strong> This is an automated notification from an unmonitored mailbox. Please do not reply directly to this email. You can check ticket updates anytime via your <a href="${safePortalUrl}" style="color:#6f3f8f">Client Portal</a>.</p>
+          <p>Thanks for reaching out to Alve Studio! We have received your submission and logged it under ticket number <strong>#${safeTicketId}</strong>.</p>
+          <p><strong>What to expect:</strong><br />Our team is reviewing the details of your request. <br />A team member will update you within 4 to 12 hours.</p>
+          <a href="${safePortalUrl}" style="color:#6f3f8f">Client Portal</a>
+          <p>If you need to add details, context, or attachments to this request in the meantime, simply reply directly to this email or visit our website at <a href="https://alvestudioagency.com/" style="color:#6f3f8f">https://alvestudioagency.com/</a>.</p>
           <p>Best regards,<br />Alve Studio Team</p>
         </div>
       </div>
