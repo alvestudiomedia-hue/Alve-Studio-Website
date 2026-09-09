@@ -35,6 +35,7 @@ export default function WebDevelopmentPage() {
         eyebrow="Web & Development"
         title="Build digital products that work as beautifully as they perform."
         body="From high-converting websites to complex web applications and mobile products, we design and develop digital experiences that are fast, scalable, secure, and built around your business goals. Whether you're launching something new, replacing an outdated platform, or scaling an existing product, we bring design, development, technology, and infrastructure together from idea to launch."
+        imageSrc="/images/wb.jpg"
       >
         <Button
           href="/contact"

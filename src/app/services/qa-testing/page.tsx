@@ -35,6 +35,7 @@ export default function QaTestingPage() {
         eyebrow="QA & Testing"
         title="Build with confidence. Launch without surprises."
         body="A great digital product isn't just one that works in development. It needs to work reliably across devices, browsers, users, environments, and real-world conditions. We help identify issues before they reach your customers — improving quality, reliability, security, performance, and user experience at every stage of development."
+        imageSrc="/images/outcomes-team.png"
       >
         <Button
           href="/contact"

@@ -50,6 +50,7 @@ export type ServicePageConfig = {
     eyebrow: string;
     title: string;
     description: string;
+    image?: string;
   };
   introduction: {
     eyebrow: string;

@@ -34,6 +34,7 @@ export default function GrowthMarketingPage() {
         eyebrow="Growth & Marketing"
         title="Turn attention into measurable growth."
         body="Getting people to notice your brand is only the beginning. We build growth strategies that help businesses get discovered, attract the right audience, convert attention into customers, and build lasting visibility — combining SEO, paid advertising, social, content, and influencer marketing around clear business objectives."
+        imageSrc="/images/hero-growth.jpg"
       >
         <Button
           href="/contact"

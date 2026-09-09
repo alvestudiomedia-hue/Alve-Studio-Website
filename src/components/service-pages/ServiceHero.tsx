@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
@@ -12,8 +13,29 @@ type ServiceHeroProps = Pick<ServicePageConfig, "name" | "hero">;
 
 export function ServiceHero({ name, hero }: ServiceHeroProps) {
   return (
-    <Section tone="hero" className="py-0">
-      <Container>
+    <Section tone="hero" className="relative overflow-hidden py-0">
+      {hero.image ? (
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+          <Image
+            src={hero.image}
+            alt={hero.title}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center opacity-80 contrast-105 saturate-110"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-purple-ink via-purple-ink/75 to-purple-ink/15"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-dark-background/70 via-transparent to-transparent"
+          />
+        </div>
+      ) : null}
+
+      <Container className="relative z-10">
         <nav
           aria-label="Breadcrumb"
           className="flex items-center gap-1.5 pt-6 text-[0.85rem] text-white/55"

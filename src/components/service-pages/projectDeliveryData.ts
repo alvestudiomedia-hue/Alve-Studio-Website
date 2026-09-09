@@ -7,6 +7,7 @@ export const projectDeliveryData: ServicePageConfig = {
     title: "From strategy to launch, we keep your project moving.",
     description:
       "Great ideas can still fail without clear planning, ownership, communication, and execution. Our Project Delivery & Management service brings structure to complex projects — aligning teams, managing priorities, tracking progress, and keeping everyone focused on the outcome. From the first planning session to launch and beyond, we help turn strategy into organized, measurable, and successful delivery.",
+    image: "/images/pd.jpg",
   },
   introduction: {
     eyebrow: "What We Manage",

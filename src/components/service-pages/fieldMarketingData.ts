@@ -7,6 +7,7 @@ export const fieldMarketingData: ServicePageConfig = {
     title: "Take your brand where your customers are.",
     description:
       "We plan, coordinate, and execute field campaigns that put your brand directly in front of your customers. Our field marketing services include activations, sampling, retail campaigns, campus campaigns, roadshows, brand ambassadors, and events — growth doesn't always happen behind a screen.",
+    image: "/images/hero-field-marketing.jpg",
   },
   introduction: {
     eyebrow: "What We Do",

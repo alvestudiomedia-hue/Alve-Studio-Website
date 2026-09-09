@@ -7,6 +7,7 @@ export const creativeServicesData: ServicePageConfig = {
     title: "Make your brand impossible to overlook.",
     description:
       "Great creative work does more than look good. It gives your business a recognizable identity, communicates your value clearly, and creates experiences people remember. From brand identity and graphic design to social creatives, product visuals, and video, we create creative assets that help your business show up consistently and confidently across every touchpoint.",
+    image: "/images/hero-creative.jpg",
   },
   introduction: {
     eyebrow: "What We Create",

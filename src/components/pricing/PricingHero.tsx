@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
@@ -5,8 +6,29 @@ import { pricingCategories } from "./pricingData";
 
 export function PricingHero() {
   return (
-    <Section tone="hero" className="-py-4">
-      <Container>
+    <Section tone="hero" className="relative overflow-hidden -py-4">
+      {/* Background stock image with fill, cover, and high-impact bold visibility */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <Image
+          src="/images/hero-pricing.jpg"
+          alt="Business strategy and growth analytics"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-80 contrast-105 saturate-110"
+        />
+        {/* Directional gradient: ensures pristine text contrast on the left while keeping the photo bold and striking */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-purple-ink via-purple-ink/75 to-purple-ink/15"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-dark-background/70 via-transparent to-transparent"
+        />
+      </div>
+
+      <Container className="relative z-10">
         <div
           className="max-w-180 py-[clamp(2.5rem,5vw,4rem)]"
           data-aos="fade-up"

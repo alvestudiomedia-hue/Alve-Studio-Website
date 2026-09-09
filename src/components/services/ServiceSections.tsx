@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
@@ -236,17 +237,40 @@ export function ServiceHero({
   eyebrow,
   title,
   body,
+  imageSrc,
   children,
 }: {
   breadcrumb: string;
   eyebrow: string;
   title: string;
   body: string;
+  imageSrc?: string;
   children?: ReactNode;
 }) {
   return (
     <Section tone="hero" className="relative overflow-hidden">
-      <Container>
+      {imageSrc ? (
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+          <Image
+            src={imageSrc}
+            alt={title}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center opacity-80 contrast-105 saturate-110"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-purple-ink via-purple-ink/75 to-purple-ink/15"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-dark-background/70 via-transparent to-transparent"
+          />
+        </div>
+      ) : null}
+
+      <Container className="relative z-10">
         <div className="max-w-4xl">
           <p className="font-sans text-eyebrow uppercase text-dark-ink-faint">
             {breadcrumb}
