@@ -12,8 +12,6 @@ export const pricingCategories: PricingCategory[] = [
     tiers: [
       {
         name: "Growth",
-        price: "₦550,000",
-        suffix: "/mo",
         meta: "Minimum engagement: 3 months",
         bestFor: "Best for businesses looking to establish a consistent growth engine.",
         features: [
@@ -27,8 +25,6 @@ export const pricingCategories: PricingCategory[] = [
       },
       {
         name: "Growth Plus",
-        price: "₦850,000",
-        suffix: "/mo",
         meta: "Minimum engagement: 6 months",
         bestFor: "Best for businesses ready to scale customer acquisition and market activity.",
         features: [
@@ -43,8 +39,6 @@ export const pricingCategories: PricingCategory[] = [
       },
       {
         name: "Growth Enterprise",
-        price: "₦1,750,000",
-        suffix: "/mo",
         meta: "Minimum engagement: 12 months",
         bestFor: "Best for businesses looking for an integrated growth partner.",
         features: [
@@ -74,7 +68,6 @@ export const pricingCategories: PricingCategory[] = [
     tiers: [
       {
         name: "Essential Web",
-        price: "₦750,000",
         meta: "One-time project",
         bestFor: "Best for businesses that need a professional digital presence.",
         features: [
@@ -88,7 +81,6 @@ export const pricingCategories: PricingCategory[] = [
       },
       {
         name: "Business Web",
-        price: "₦1,500,000",
         meta: "One-time project",
         bestFor: "Best for growing businesses that need a more advanced website.",
         features: [
@@ -103,7 +95,6 @@ export const pricingCategories: PricingCategory[] = [
       },
       {
         name: "Advanced Digital Product",
-        price: "₦3,000,000+",
         meta: "Custom project",
         bestFor: "Best for businesses building complex digital products.",
         features: [
@@ -119,7 +110,7 @@ export const pricingCategories: PricingCategory[] = [
     note: {
       title: "Website maintenance",
       description:
-        "From ₦100,000 / month, available after launch. Includes bug fixes, security updates, monitoring, performance optimisation, content updates, minor improvements, and technical support.",
+        "Available as a tailored post-launch retainer. Includes bug fixes, security updates, monitoring, performance optimisation, content updates, minor improvements, and technical support.",
     },
   },
   {
@@ -134,14 +125,12 @@ export const pricingCategories: PricingCategory[] = [
     tiers: [
       {
         name: "QA Essential",
-        price: "₦300,000",
         meta: "Per engagement",
         bestFor: "Best for businesses that need structured testing for a product or release.",
         features: ["Test planning & functional testing", "User flow & UI testing", "Cross-device testing", "Defect reporting", "Test summary report"],
       },
       {
         name: "QA Professional",
-        price: "₦600,000",
         meta: "Per engagement",
         bestFor: "Best for products requiring deeper testing before release.",
         features: ["Everything in QA Essential, plus:", "Regression, smoke & API testing", "Integration & authentication testing", "Cross-browser & staging validation", "Release readiness report"],
@@ -149,8 +138,6 @@ export const pricingCategories: PricingCategory[] = [
       },
       {
         name: "QA Continuous",
-        price: "₦1,000,000",
-        suffix: "/mo",
         meta: "Ongoing engagement",
         bestFor: "Best for teams releasing products continuously.",
         features: ["Continuous functional & regression testing", "Load / performance testing", "Staging & production validation", "Test case & defect tracking", "Sprint QA & release readiness support"],
@@ -168,16 +155,12 @@ export const pricingCategories: PricingCategory[] = [
     tiers: [
       {
         name: "Delivery Essential",
-        price: "₦400,000",
-        suffix: "/mo",
         meta: "Monthly engagement",
         bestFor: "Best for small teams that need structure and visibility.",
         features: ["Project planning & timeline management", "Milestone tracking", "Weekly progress reporting", "Sprint coordination & task tracking", "Basic risk management"],
       },
       {
         name: "Delivery Professional",
-        price: "₦750,000",
-        suffix: "/mo",
         meta: "Monthly engagement",
         bestFor: "Best for growing teams managing complex projects.",
         features: ["Everything in Delivery Essential, plus:", "Agile project management & sprint facilitation", "Product backlog management", "Vendor & stakeholder management", "Launch planning & go-live coordination"],
@@ -185,8 +168,6 @@ export const pricingCategories: PricingCategory[] = [
       },
       {
         name: "Delivery Partner",
-        price: "₦1,250,000",
-        suffix: "/mo",
         meta: "Monthly engagement",
         bestFor: "Best for businesses that need Alve to operate as an extension of their delivery team.",
         features: ["Dedicated delivery leadership", "Product, engineering & creative coordination", "Backlog, sprint & vendor management", "Launch & go-live management", "Executive reporting"],
@@ -204,14 +185,12 @@ export const pricingCategories: PricingCategory[] = [
     tiers: [
       {
         name: "Creative Starter",
-        price: "₦350,000",
         meta: "Per project",
         bestFor: "Best for new businesses that need a strong visual foundation.",
         features: ["Logo design", "Colour palette & typography", "Basic visual direction", "Social profile assets", "Basic brand assets"],
       },
       {
         name: "Brand & Creative",
-        price: "₦750,000",
         meta: "Per project",
         bestFor: "Best for businesses building or refreshing their brand identity.",
         features: ["Brand identity & logo system", "Colour system & typography", "Brand guidelines", "Social templates & marketing collateral", "Product mockups"],
@@ -219,7 +198,6 @@ export const pricingCategories: PricingCategory[] = [
       },
       {
         name: "Creative Partner",
-        price: "₦1,500,000+",
         meta: "Project / ongoing engagement",
         bestFor: "Best for businesses requiring a complete brand and creative system.",
         features: ["Brand strategy & visual identity system", "Campaign & social creative direction", "Marketing collateral & product mockups", "Advertising creatives", "Video creative direction & production coordination"],
@@ -227,7 +205,7 @@ export const pricingCategories: PricingCategory[] = [
     ],
     note: {
       title: "Ongoing creative retainer",
-      description: "From ₦500,000 / month, for businesses that need continuous creative production.",
+      description: "Available as a tailored monthly retainer for businesses that need continuous creative production.",
     },
   },
   {
@@ -241,16 +219,12 @@ export const pricingCategories: PricingCategory[] = [
     tiers: [
       {
         name: "Field Essential",
-        price: "₦350,000",
-        suffix: "/mo",
         meta: "Management fee",
         bestFor: "Best for brands running focused field campaigns or recurring activations.",
         features: ["Field campaign strategy & planning", "Activation planning & scheduling", "Field team coordination", "Basic logistics coordination", "Campaign performance reporting"],
       },
       {
         name: "Field Growth",
-        price: "₦750,000",
-        suffix: "/mo",
         meta: "Management fee",
         bestFor: "Best for brands running recurring or multi-location field campaigns.",
         features: ["Everything in Field Essential, plus:", "Multi-location planning", "Brand ambassador coordination", "Retail, campus & sampling campaigns", "Daily monitoring & post-campaign analysis"],
@@ -258,8 +232,6 @@ export const pricingCategories: PricingCategory[] = [
       },
       {
         name: "Field Scale",
-        price: "₦1,500,000+",
-        suffix: "/mo",
         meta: "Management fee",
         bestFor: "Best for large-scale or multi-location field operations.",
         features: ["National / multi-city campaign planning", "Brand ambassador network management", "Roadshow & retail activation management", "Field supervisors", "Executive campaign reporting"],
@@ -311,9 +283,9 @@ export const packageGuidance = [
 
 export const pricingNotes = [
   {
-    title: "Starting prices",
+    title: "Tailored Scope & Custom Quotes",
     description:
-      "All prices shown are starting prices. Final pricing depends on project scope, complexity, timeline, team requirements, and deliverables.",
+      "All engagements are custom-scoped and quoted based on project complexity, timeline, team requirements, and deliverables.",
   },
   {
     title: "No hidden execution costs",

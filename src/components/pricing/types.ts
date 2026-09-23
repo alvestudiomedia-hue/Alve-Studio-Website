@@ -1,6 +1,6 @@
 export type PricingTier = {
   name: string;
-  price: string;
+  price?: string;
   suffix?: string;
   meta: string;
   bestFor: string;

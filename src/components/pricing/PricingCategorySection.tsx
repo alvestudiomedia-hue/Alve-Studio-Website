@@ -36,6 +36,8 @@ export function PricingCategorySection({ category }: { category: PricingCategory
               tier={tier}
               href={category.breakdownHref}
               index={index}
+              categoryTitle={category.title}
+              categoryId={category.id}
             />
           ))}
         </Reveal>

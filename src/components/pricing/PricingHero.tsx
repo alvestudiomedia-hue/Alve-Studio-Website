@@ -43,7 +43,7 @@ export function PricingHero() {
             Digital products. Growth. Creative. Delivery. Field execution.
           </h1>
           <p className="mt-[1.1rem] text-[clamp(1.05rem,1.4vw,1.2rem)] leading-[1.65] text-white/72 text-pretty">
-            At Alve Studio, we help businesses build, launch, improve, and grow. Our services are available through flexible engagement models depending on what you need — from one-time projects to ongoing monthly partnerships. All prices shown are starting prices; complex projects are quoted based on scope, requirements, and execution needs.
+            At Alve Studio, we help businesses build, launch, improve, and grow. Our services are available through flexible engagement models depending on what you need — from one-time projects to ongoing monthly partnerships. Every engagement is custom-scoped and tailored to your goals. Request a quote directly to get started.
           </p>
         </div>
         <nav

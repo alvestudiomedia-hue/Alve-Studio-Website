@@ -127,12 +127,13 @@ export function Button(props: ButtonProps) {
     >;
 
     if (isExternal(href)) {
+      const isMailOrTel = /^(mailto:|tel:)/i.test(href);
       return (
         <a
           href={href}
           className={classes}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={isMailOrTel ? anchorProps.target : (anchorProps.target ?? "_blank")}
+          rel={isMailOrTel ? anchorProps.rel : (anchorProps.rel ?? "noopener noreferrer")}
           {...anchorProps}
         >
           {content}
