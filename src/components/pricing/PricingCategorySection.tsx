@@ -2,9 +2,15 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import { PricingTierCard } from "./PricingTierCard";
-import type { PricingCategory } from "./types";
+import type { PricingCategory, PricingTier } from "./types";
 
-export function PricingCategorySection({ category }: { category: PricingCategory }) {
+export function PricingCategorySection({
+  category,
+  onSelectQuote,
+}: {
+  category: PricingCategory;
+  onSelectQuote?: (tier: PricingTier, categoryTitle: string, categoryId?: string) => void;
+}) {
   return (
     <section
       id={category.id}
@@ -38,6 +44,7 @@ export function PricingCategorySection({ category }: { category: PricingCategory
               index={index}
               categoryTitle={category.title}
               categoryId={category.id}
+              onSelectQuote={onSelectQuote}
             />
           ))}
         </Reveal>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { PricingCategorySection } from "./PricingCategorySection";
 import { PricingHero } from "./PricingHero";
 import { PricingInfoSection } from "./PricingInfoSection";
+import { QuoteModal } from "./QuoteModal";
 import { MarketingCta } from "@/components/ui/MarketingCta";
 import {
   packageGuidance,
@@ -11,9 +12,16 @@ import {
   pricingModels,
   pricingNotes,
 } from "./pricingData";
+import type { PricingTier } from "./types";
 
 export function PricingPage() {
   const [showQuickLinks, setShowQuickLinks] = useState(false);
+  const [quoteSelection, setQuoteSelection] = useState<{
+    tierName: string;
+    categoryTitle: string;
+    categoryId?: string;
+    meta?: string;
+  } | null>(null);
 
   useEffect(() => {
     const updateVisibility = () => {
@@ -31,35 +39,56 @@ export function PricingPage() {
     };
   }, []);
 
+  const handleSelectQuote = (
+    tier: PricingTier,
+    categoryTitle: string,
+    categoryId?: string,
+  ) => {
+    setQuoteSelection({
+      tierName: tier.name,
+      categoryTitle,
+      categoryId,
+      meta: tier.meta,
+    });
+  };
+
   return (
     <div className="bg-service-paper font-sans text-service-ink">
       <div id="pricing-hero">
         <PricingHero />
       </div>
       <div className="relative">
-        {showQuickLinks ? <nav
-          aria-label="Pricing categories quick links"
-          className="fixed top-44 right-6 z-40 hidden w-52 rounded-md border border-service-ink/10 bg-service-paper/95 p-3 shadow-lift backdrop-blur-md lg:block"
-        >
-          <p className="px-2 pb-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-service-ink/60">
-            Pricing categories
-          </p>
-          <div className="flex flex-col gap-1">
-            {pricingCategories.map((category) => (
-              <a
-                key={category.id}
-                href={`#${category.id}`}
-                className="rounded-sm px-2 py-2 text-body-sm text-service-ink transition-colors hover:bg-service-ink/8 hover:text-service-accent"
-              >
-                {category.quickLinkLabel ?? category.title}
-              </a>
-            ))}
-          </div>
-        </nav> : null}
+        {showQuickLinks ? (
+          <nav
+            aria-label="Pricing categories quick links"
+            className="fixed top-44 right-6 z-40 hidden w-52 rounded-md border border-service-ink/10 bg-service-paper/95 p-3 shadow-lift backdrop-blur-md lg:block"
+          >
+            <p className="px-2 pb-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-service-ink/60">
+              Pricing categories
+            </p>
+            <div className="flex flex-col gap-1">
+              {pricingCategories.map((category) => (
+                <a
+                  key={category.id}
+                  href={`#${category.id}`}
+                  className="rounded-sm px-2 py-2 text-body-sm text-service-ink transition-colors hover:bg-service-ink/8 hover:text-service-accent"
+                >
+                  {category.quickLinkLabel ?? category.title}
+                </a>
+              ))}
+            </div>
+          </nav>
+        ) : null}
+
         {pricingCategories.map((category) => (
-          <PricingCategorySection key={category.id} category={category} />
+          <PricingCategorySection
+            key={category.id}
+            category={category}
+            onSelectQuote={handleSelectQuote}
+          />
         ))}
       </div>
+
       <PricingInfoSection
         tone="paper"
         eyebrow="How Our Pricing Works"
@@ -84,6 +113,15 @@ export function PricingPage() {
         eyebrow="Build. Grow. Create. Deliver. Activate."
         title="Let's build something that works."
         description="Whether you're launching a product, improving your website, growing your customer base, strengthening your brand, managing a complex project, or taking your campaign into the field, Alve Studio can help."
+      />
+
+      {/* Quote Form Modal */}
+      <QuoteModal
+        isOpen={Boolean(quoteSelection)}
+        onClose={() => setQuoteSelection(null)}
+        initialTierName={quoteSelection?.tierName}
+        initialCategoryTitle={quoteSelection?.categoryTitle}
+        initialMeta={quoteSelection?.meta}
       />
     </div>
   );

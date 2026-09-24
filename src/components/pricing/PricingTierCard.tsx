@@ -8,12 +8,15 @@ export function PricingTierCard({
   href,
   index,
   categoryTitle = "Studio Services",
+  categoryId,
+  onSelectQuote,
 }: {
   tier: PricingTier;
   href: string;
   index: number;
   categoryTitle?: string;
   categoryId?: string;
+  onSelectQuote?: (tier: PricingTier, categoryTitle: string, categoryId?: string) => void;
 }) {
   const quoteSubject = `Quote Request: ${categoryTitle} — ${tier.name}`;
   const quoteBody = [
@@ -80,20 +83,36 @@ export function PricingTierCard({
       </ul>
 
       <div className="mt-auto flex flex-col gap-2.5 pt-4">
-        <Button
-          href={quoteMailto}
-          variant="primary"
-          size="sm"
-          className={cn(
-            "h-auto w-full justify-center rounded-pill py-3 font-service text-[0.85rem] font-semibold text-white shadow-sm transition-all",
-            tier.featured
-              ? "bg-service-accent hover:bg-service-accent-dark"
-              : "bg-purple-ink hover:bg-purple-mid",
-          )}
-          iconRight={<Mail className="size-4" />}
-        >
-          Get a Quote
-        </Button>
+        {onSelectQuote ? (
+          <button
+            type="button"
+            onClick={() => onSelectQuote(tier, categoryTitle, categoryId)}
+            className={cn(
+              "h-auto w-full justify-center rounded-pill py-3 px-4 font-service text-[0.85rem] font-semibold text-white shadow-sm transition-all duration-200 cursor-pointer flex items-center gap-2",
+              tier.featured
+                ? "bg-service-accent hover:bg-service-accent-dark hover:shadow-md"
+                : "bg-purple-ink hover:bg-purple-mid hover:shadow-md",
+            )}
+          >
+            <span>Get a Quote</span>
+            <Mail className="size-4 shrink-0" aria-hidden="true" />
+          </button>
+        ) : (
+          <Button
+            href={quoteMailto}
+            variant="primary"
+            size="sm"
+            className={cn(
+              "h-auto w-full justify-center rounded-pill py-3 font-service text-[0.85rem] font-semibold text-white shadow-sm transition-all",
+              tier.featured
+                ? "bg-service-accent hover:bg-service-accent-dark"
+                : "bg-purple-ink hover:bg-purple-mid",
+            )}
+            iconRight={<Mail className="size-4" />}
+          >
+            Get a Quote
+          </Button>
+        )}
 
         <Button
           href={href}
