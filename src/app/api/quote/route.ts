@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+import { renderQuoteConfirmationEmail } from '@/lib/quote/quote-email';
+
 export const runtime = 'nodejs';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -92,8 +94,9 @@ export async function POST(request: Request) {
   const resendApiKey = process.env.RESEND_API_KEY;
   const adminEmail = process.env.ADMIN_EMAIL || 'alvestudiomedia@gmail.com';
   const emailFrom = process.env.EMAIL_FROM || 'Alve Studio <hello@alvestudioagency.com>';
+  const clientPortalUrl = process.env.CLIENT_PORTAL_URL || 'https://alvestudioagency.com/';
 
-  // If Resend is configured, send the notification email
+  // If Resend is configured, send the team notification and customer confirmation
   if (resendApiKey) {
     try {
       const resend = new Resend(resendApiKey);
@@ -148,16 +151,58 @@ export async function POST(request: Request) {
   </body>
 </html>`;
 
-      await resend.emails.send({
-        from: emailFrom,
-        to: [adminEmail],
-        replyTo: email,
-        subject: `New Quote Request: ${packageName} — ${fullName} (#${ticketId})`,
-        html: htmlContent,
+      const confirmation = renderQuoteConfirmationEmail(
+        { fullName, packageName },
+        ticketId,
+        clientPortalUrl,
+      );
+      const emailResults = await Promise.allSettled([
+        resend.emails.send({
+          from: emailFrom,
+          to: [adminEmail],
+          replyTo: email,
+          subject: `New Quote Request: ${packageName} — ${fullName} (#${ticketId})`,
+          html: htmlContent,
+        }),
+        resend.emails.send({
+          from: emailFrom,
+          to: [email],
+          replyTo: adminEmail,
+          subject: `Alve Studio quote request #${ticketId} received`,
+          ...confirmation,
+        }),
+      ]);
+
+      const labels = ['quote notification', 'customer quote confirmation'];
+      const emailFailed = emailResults.some((result, index) => {
+        if (result.status === 'rejected') {
+          console.error(`Failed to send ${labels[index]} email via Resend:`, result.reason);
+          return true;
+        }
+
+        if (result.value.error || !result.value.data?.id) {
+          console.error(
+            `Resend rejected the ${labels[index]} email:`,
+            result.value.error ?? { message: 'Resend did not return an email ID.' },
+          );
+          return true;
+        }
+
+        return false;
       });
+
+      if (emailFailed) {
+        return NextResponse.json(
+          { success: false, message: 'Unable to send quote request emails. Please try again.' },
+          { status: 500 },
+        );
+      }
     } catch (emailError) {
-      console.error('Failed to send quote notification email via Resend:', emailError);
-      // We still return success to the user with their ticket ID so they aren't blocked
+      console.error('Failed to prepare quote emails:', emailError);
+      return NextResponse.json(
+        { success: false, message: 'Unable to send quote request emails. Please try again.' },
+        { status: 500 },
+      );
     }
   } else {
     console.log('Quote submission received in dev mode (RESEND_API_KEY not configured):', {

@@ -77,15 +77,20 @@ export const socialLinks: {
   href: string;
   icon: SocialIconName;
 }[] = [
-  { label: "Alve Studio on X", href: "https://x.com", icon: "x" },
+  { label: "Alve Studio on X", href: "https://x.com/alvestudiomedia?s=11", icon: "x" },
   {
     label: "Alve Studio on LinkedIn",
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/company/alve-studio",
     icon: "linkedin",
   },
   {
     label: "Alve Studio on Instagram",
-    href: "https://instagram.com",
+    href: "https://www.instagram.com/alvestudio01?stkn=cWM5dXV2NWljd2Jy",
     icon: "instagram",
+  },
+  {
+    label: "Alve Studio on Facebook",
+    href: "https://www.facebook.com/profile.php?id=61553959263141",
+    icon: "facebook",
   },
 ];
