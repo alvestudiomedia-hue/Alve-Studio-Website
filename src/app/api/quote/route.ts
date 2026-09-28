@@ -47,6 +47,7 @@ export async function POST(request: Request) {
   const fullName = typeof values.fullName === 'string' ? values.fullName.trim() : '';
   const email = typeof values.email === 'string' ? values.email.trim() : '';
   const whatsappNumber = typeof values.whatsappNumber === 'string' ? values.whatsappNumber.trim() : '';
+  const budgetRange = typeof values.budgetRange === 'string' ? values.budgetRange.trim() : '';
   const packageName = typeof values.packageName === 'string' ? values.packageName.trim() : '';
   const categoryTitle = typeof values.categoryTitle === 'string' ? values.categoryTitle.trim() : '';
   const projectNotes = typeof values.projectNotes === 'string' ? values.projectNotes.trim() : '';
@@ -74,6 +75,10 @@ export async function POST(request: Request) {
 
   if (!packageName) {
     errors.packageName = 'Please select a product or package.';
+  }
+
+  if (!budgetRange) {
+    errors.budgetRange = 'Please select a budget range.';
   }
 
   if (Object.keys(errors).length > 0) {
@@ -123,6 +128,10 @@ export async function POST(request: Request) {
               <td style="padding:8px 12px 8px 0;color:#6b6475">WhatsApp:</td>
               <td style="padding:8px 0;font-weight:600"><a href="https://wa.me/${phoneDigits}" style="color:#25D366;font-weight:bold">${escapeHtml(whatsappNumber)}</a></td>
             </tr>
+            <tr>
+              <td style="padding:8px 12px 8px 0;color:#6b6475">Budget:</td>
+              <td style="padding:8px 0;font-weight:600">${escapeHtml(budgetRange)}</td>
+            </tr>
           </table>
 
           ${
@@ -156,6 +165,7 @@ export async function POST(request: Request) {
       fullName,
       email,
       whatsappNumber,
+      budgetRange,
       packageName,
       categoryTitle,
     });
@@ -169,6 +179,7 @@ export async function POST(request: Request) {
       fullName,
       packageName,
       whatsappNumber,
+      budgetRange,
     },
   });
 }

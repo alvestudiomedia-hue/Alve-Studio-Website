@@ -25,6 +25,7 @@ export function QuoteModal({
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsappNumber, setWhatsappNumber] = useState("");
+  const [budgetRange, setBudgetRange] = useState("");
   const [projectNotes, setProjectNotes] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -112,6 +113,10 @@ export function QuoteModal({
       errors.packageName = "Please select a product or package.";
     }
 
+    if (!budgetRange) {
+      errors.budgetRange = "Please select a budget range.";
+    }
+
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -131,6 +136,7 @@ export function QuoteModal({
           fullName,
           email,
           whatsappNumber,
+          budgetRange,
           packageName: selectedPackage,
           categoryTitle: selectedCategory,
           projectNotes,
@@ -332,6 +338,42 @@ export function QuoteModal({
                 />
                 {fieldErrors.whatsappNumber && (
                   <p className="mt-1 text-xs text-red-500">{fieldErrors.whatsappNumber}</p>
+                )}
+              </div>
+
+              {/* Monthly Budget Range */}
+              <div>
+                <label
+                  htmlFor="budgetRange"
+                  className="block text-xs font-medium text-ink mb-1"
+                >
+                  Monthly Budget Range <span className="text-red-500">*</span>
+                </label>
+                <div className="relative">
+                  <select
+                    id="budgetRange"
+                    value={budgetRange}
+                    onChange={(e) => {
+                      setBudgetRange(e.target.value);
+                      if (fieldErrors.budgetRange) {
+                        setFieldErrors((prev) => ({ ...prev, budgetRange: "" }));
+                      }
+                    }}
+                    className={cn(inputClasses(!!fieldErrors.budgetRange), "appearance-none cursor-pointer pr-10")}
+                  >
+                    <option value="" disabled>Select a budget range</option>
+                    <option value="Under ₦200k">Under ₦200k</option>
+                    <option value="₦200k–₦500k">₦200k–₦500k</option>
+                    <option value="₦500k–₦1M">₦500k–₦1M</option>
+                    <option value="Above ₦1M">Above ₦1M</option>
+                    <option value="Prefer to discuss on call">Prefer to discuss on call</option>
+                  </select>
+                  <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-mid"><path d="m6 9 6 6 6-6"/></svg>
+                  </div>
+                </div>
+                {fieldErrors.budgetRange && (
+                  <p className="mt-1 text-xs text-red-500">{fieldErrors.budgetRange}</p>
                 )}
               </div>
 
