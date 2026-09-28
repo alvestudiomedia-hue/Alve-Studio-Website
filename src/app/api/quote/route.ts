@@ -90,7 +90,7 @@ export async function POST(request: Request) {
 
   const ticketId = createTicketId();
   const resendApiKey = process.env.RESEND_API_KEY;
-  const adminEmail = process.env.ADMIN_EMAIL || 'hello@alvestudioagency.com';
+  const adminEmail = process.env.ADMIN_EMAIL || 'alvestudiomedia@gmail.com';
   const emailFrom = process.env.EMAIL_FROM || 'Alve Studio <hello@alvestudioagency.com>';
 
   // If Resend is configured, send the notification email
