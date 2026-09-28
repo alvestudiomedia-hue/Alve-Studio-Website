@@ -204,10 +204,29 @@ export function Instagram(props: IconProps) {
   );
 }
 
+export function Facebook(props: IconProps) {
+  return (
+    <Brand {...props}>
+<svg
+  viewBox="0 0 24 24"
+  fill="currentColor"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    fillRule="evenodd"
+    clipRule="evenodd"
+    d="M13.5 2.5C7.425 2.5 2.5 7.425 2.5 13.5c0 5.49 4.018 10.04 9.281 10.87v-7.69H8.988v-3.18h2.793v-2.42c0-2.76 1.643-4.29 4.166-4.29 1.207 0 2.471.216 2.471.216v2.715h-1.393c-1.371 0-1.798.851-1.798 1.725v2.054h3.06l-.49 3.18h-2.57v7.69C19.982 23.54 24 18.99 24 13.5 24 7.425 19.075 2.5 13 2.5h.5Z"
+  />
+</svg>
+    </Brand>
+  );
+}
+
 export const socialIcons = {
   x: XMark,
   linkedin: LinkedIn,
   instagram: Instagram,
+  facebook: Facebook,
 } as const;
 
 export type SocialIconName = keyof typeof socialIcons;
